@@ -6,9 +6,12 @@ use App\Repository\ProjectsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectsRepository::class)
+ * #ORM\Table(name="projects")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Projects
 {
@@ -40,12 +43,13 @@ class Projects
     private $photo;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToMany(targetEntity=Users::class, inversedBy="projects")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $users;
 
@@ -53,6 +57,11 @@ class Projects
      * @ORM\ManyToMany(targetEntity=Categories::class, inversedBy="projects")
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     */
+    private $updateAt;
 
     public function __construct()
     {
@@ -75,6 +84,11 @@ class Projects
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getSlug(): string
+    {
+        return (new Slugify())->slugify($this->name);
     }
 
     public function getDescription(): ?string
@@ -175,5 +189,29 @@ class Projects
         }
 
         return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(\DateTimeInterface $updateAt): self
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function updateTimestamps()
+    {
+        if($this->getCreatedAt() === null){
+            $this->setCreatedAt(new \DateTimeImmutable);
+        }
+        $this->setUpdateAt(new \DateTimeImmutable);
     }
 }

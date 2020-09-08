@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
- * @Route("/projects")
+ * @Route("/")
  */
 class ProjectsController extends AbstractController
 {
@@ -29,7 +29,7 @@ class ProjectsController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="projects_new", methods={"GET","POST"})
+     * @Route("/projects/new", name="projects_new", methods={"GET","POST"})
      */
     public function new(Request $request, SluggerInterface $slugger): Response
     {
@@ -79,17 +79,26 @@ class ProjectsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="projects_show", methods={"GET"})
+     * @Route("/projects/{slug}-{id}", name="property.show", requirements={"slug": "[a-z0-9\-]*"})
+     * @param Projects $project
+     * @return Response
      */
-    public function show(Projects $project): Response
+    public function show(Projects $project, string $slug): Response
     {
+        if ($project->getSlug() !== $slug) {
+            return $this->redirectToRoute('projects/show.html.twig', [
+                'id' => $project->getId(),
+                'slug' => $project->getSlug()
+            ], 301);
+        }
+
         return $this->render('projects/show.html.twig', [
             'project' => $project,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="projects_edit", methods={"GET","POST"})
+     * @Route("/projects/{id}/edit", name="projects_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Projects $project): Response
     {
@@ -109,7 +118,7 @@ class ProjectsController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="projects_delete", methods={"DELETE"})
+     * @Route("/projects/{id}", name="projects_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Projects $project): Response
     {

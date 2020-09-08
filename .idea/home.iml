@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="App\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" packagePrefix="App\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/cocur/slugify" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
@@ -23,9 +24,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/reflection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/egulias/email-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/imagine/imagine" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-eventmanager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-zendframework-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/liip/imagine-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/monolog/monolog" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />
@@ -93,6 +96,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/service-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/templating" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/translation-contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-bridge" />
