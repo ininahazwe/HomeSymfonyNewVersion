@@ -3,32 +3,44 @@
 {% block title %}Categories{% endblock %}
 
 {% block body %}
-    <h1>Categories</h1>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1>Categories</h1>
+        <a class="btn btn-light" href="{{ path('categories_index') }}">back to list</a>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ category.id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ category.name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ category.description }}</td>
+                </tr>
+                <tr>
+                    <th>Icon</th>
+                    <td>
+                        <img class="card-img-top" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('echelle') }}" alt="{{ category.name }}">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ category.description }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ category.photo }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <a href="{{ path('categories_edit', {id: category.id}) }}" class="btn btn-light">Edit the project</a>
+        <a href="#" onclick="event.preventDefault(); confirm('êtes-vous sûr(e)?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Remove the project</a>
 
-    <a href="{{ path('categories_index') }}">back to list</a>
+        <form id="js-pin-delete-form" action="{{ path('categories_delete', {id: category.id}) }}" method="post" style="display: none;">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('categories_deletion_' ~ category.id) }}">
+            <input type="hidden" name="_method" value="DELETE">
+        </form>
 
-    <a href="{{ path('categories_edit', {'id': category.id}) }}">edit</a>
+        {#{{ include('categories/_delete_form.html.twig') }}#}
 
-    {{ include('categories/_delete_form.html.twig') }}
+    </div>
+</div>
+
 {% endblock %}

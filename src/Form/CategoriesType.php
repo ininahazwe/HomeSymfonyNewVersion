@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Categories;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,8 +15,10 @@ class CategoriesType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('photo')
-            ->add('projects')
+            ->add('photoUpload', FileType::class, [
+                'required' => false,
+                'mapped' =>false,
+            ])
         ;
     }
 

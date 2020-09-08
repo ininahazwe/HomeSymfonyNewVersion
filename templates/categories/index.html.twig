@@ -3,37 +3,44 @@
 {% block title %}Categories index{% endblock %}
 
 {% block body %}
-    <h1>Categories index</h1>
+<div class="row">
+    <div class="col-md-6 mx-auto">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Photo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td>{{ category.photo }}</td>
-                <td>
-                    <a href="{{ path('categories_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('categories_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <h1>Categories index</h1>
 
-    <a href="{{ path('categories_new') }}">Create new</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Icon</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{{ category.description|length > 30 ? category.description|slice(0, 30) ~ '...' }}</td>
+                    <td>
+                        <img class="card-img-top" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('icon') }}" alt="{{ category.name }}">
+                    </td>
+                    <td>
+                        <a class="btn btn-light" href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}">show</a>
+                        <a class="btn btn-light" href="{{ path('categories_edit', {id: category.id, slug: category.slug}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-light" href="{{ path('categories_new') }}">Create new</a>
+    </div>
+</div>
 {% endblock %}

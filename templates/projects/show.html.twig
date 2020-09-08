@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <artile class="pin bg-white rounded shadow">
+            <article class="pin bg-white rounded shadow">
                 <div class="mw-100 rounded-top overflow-hidden">
                     <img class="card-img-top" src="{{ asset('uploads/' ~ project.photo) }}" alt="{{ project.name }}">
                 </div>
@@ -15,13 +15,24 @@
                     <h1 class="h5 text-secondary"><a href="{{ path('property.show', {id: project.id, slug: project.slug}) }}" class="text-decoration-none">{{ project.name }}</a></h1>
                     <p class="text-muted">
                         <small>
-                            Submitted
-
+                            Submitted by
+                            {% for user in project.users %}
+                                {{ user.fullName }}
+                            {% endfor %}
+                        </small>
+                    </p>
+                    <p class="text-muted">
+                        <small>
+                            Categories
+                            {% for category in project.category %}
+                                {{ category.name }}
+                            {% endfor %}
                         </small>
                     </p>
                     <p class="text-break pt-3">
                         {{ project.description }}
                     </p>
+                    {% if is_granted('ROLE_USER') %}
                     <div class="pt-3">
                         <a href="{{ path('projects_edit', {id: project.id}) }}" class="btn btn-light">Edit the project</a>
                         <a href="#" onclick="event.preventDefault(); confirm('êtes-vous sûr(e)?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Remove the project</a>
@@ -31,8 +42,9 @@
                             <input type="hidden" name="_method" value="DELETE">
                         </form>
                     </div>
+                    {% endif %}
                 </div>
-            </artile>
+            </article>
         </div>
     </div>
 

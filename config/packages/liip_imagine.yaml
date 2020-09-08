@@ -9,6 +9,12 @@ liip_imagine:
                 thumbnail:
                     size: [400,250]
                     mode: outbound
+        icon:
+            quality: 50
+            filters:
+                thumbnail:
+                    size: [ 50,50 ]
+                    mode: outbound
 
         echelle:
             quality: 85

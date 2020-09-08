@@ -8,7 +8,7 @@
 
         <div class="collapse navbar-collapse" id="navbarsExample03">
             <ul class="navbar-nav ml-auto">
-
+                {% if is_granted('ROLE_USER') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('projects_new') }}">New Project</a>
                     </li>
@@ -18,13 +18,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                     </li>
-
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_register') }}">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_login') }}">Login</a>
                     </li>
+                {% endif %}
 
             </ul>
         </div>

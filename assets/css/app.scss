@@ -1,3 +1,43 @@
 @import "~bootstrap/scss/bootstrap";
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+$primary-font: 'Montserrat';
+
+body {
+  font-family: $primary-font, sans-serif;
+}
+.alert{
+  padding: 10px;
+  color: white;
+  text-align: center;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+
+  &.alert-success {
+    background: green;
+  }
+  &.alert-error {
+    background: red;
+  }
+  &.alert-info {
+    background: blue;
+  }
+}
+
+.vich-image .form-check {
+  @extend .mt-3;
+}
+.vich-image img {
+  @extend .mb-2, .rounded, .shadow, .img-thumbnail;
+}
+
+.pin img{
+  transition: transform 0.3s ease-out;
+
+  &:hover{
+    transform: scale(1.075);
+  }
+}
 
