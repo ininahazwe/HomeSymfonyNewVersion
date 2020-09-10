@@ -25,7 +25,7 @@
                     <td>{{ category.name }}</td>
                     <td>{{ category.description|length > 30 ? category.description|slice(0, 30) ~ '...' }}</td>
                     <td>
-                        <img class="card-img-top" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('icon') }}" alt="{{ category.name }}">
+                        <a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}"><img class="card-img-top" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('icon') }}" alt="{{ category.name }}"></a>
                     </td>
                     <td>
                         <a class="btn btn-light" href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}">show</a>

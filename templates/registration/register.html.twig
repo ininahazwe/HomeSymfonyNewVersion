@@ -3,6 +3,8 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
 
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
@@ -12,16 +14,17 @@
 
     {{ form_start(registrationForm) }}
 
-        {{ form_row(registrationForm.firstname, {'label': 'Firstname','attr': {'class': 'form-control', 'placeholder': 'firstname ...'}}) }}
-        {{ form_row(registrationForm.lastname, {'label': 'Lastname','attr': {'class': 'form-control', 'placeholder': 'lastname ...'}}) }}
-        {{ form_row(registrationForm.email, {'label': 'Email address','attr': {'class': 'form-control', 'placeholder': 'nom d\'utilisateur ...'}}) }}
-        {{ form_row(registrationForm.plainPassword, {'label': 'Password','attr': {'class': 'form-control', 'placeholder': 'nom d\'utilisateur ...'}}) }}
-        {{ form_row(registrationForm.confirm_password, {'label': 'Password confirmation','attr': {'class': 'form-control', 'placeholder': 'your password again ...'}}) }}
+        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.lastname) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword) }}
+        {{ form_row(registrationForm.confirm_password) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button class="btn btn-lg btn-primary" type="submit">
             Register
         </button>
     {{ form_end(registrationForm) }}
-
+    </div>
+</div>
 {% endblock %}

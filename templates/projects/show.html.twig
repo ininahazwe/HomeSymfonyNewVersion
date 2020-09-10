@@ -4,10 +4,9 @@
 
 {% block body %}
     <h1>Projects</h1>
-
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <article class="pin bg-white rounded shadow">
+            <article class="pin bg-white rounded">
                 <div class="mw-100 rounded-top overflow-hidden">
                     <img class="card-img-top" src="{{ asset('uploads/' ~ project.photo) }}" alt="{{ project.name }}">
                 </div>
@@ -25,7 +24,7 @@
                         <small>
                             Categories
                             {% for category in project.category %}
-                                {{ category.name }}
+                                <a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}"><img class="icon-cat card-img-top" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('icon') }}" alt="{{ category.name }}"></a>
                             {% endfor %}
                         </small>
                     </p>
@@ -37,10 +36,7 @@
                         <a href="{{ path('projects_edit', {id: project.id}) }}" class="btn btn-light">Edit the project</a>
                         <a href="#" onclick="event.preventDefault(); confirm('êtes-vous sûr(e)?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Remove the project</a>
 
-                        <form id="js-pin-delete-form" action="{{ path('projects_delete', {id: project.id}) }}" method="post" style="display: none;">
-                            <input type="hidden" name="csrf_token" value="{{ csrf_token('projects_deletion_' ~ project.id) }}">
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
+                        {{ include('projects/_delete_form.html.twig') }}
                     </div>
                     {% endif %}
                 </div>

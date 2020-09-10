@@ -1,24 +1,18 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Admin dashboard{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success" role="alert">{{ message }}</div>
-    {% endfor %}
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/ininahazweyves/Desktop/home/src/Controller/AdminController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/ininahazweyves/Desktop/home/templates/admin/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+<div class="row">
+<div class="mx-auto">
+    <div class="row">
+        <div class="col-md-5 bg-light m-2">Users management</div>
+        <div class="col-md-5 bg-light m-2">Projects management</div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 bg-light m-2">Comments management</div>
+        <div class="col-md-5 bg-light m-2">Contact forms management</div>
+    </div>
+</div>
 </div>
 {% endblock %}

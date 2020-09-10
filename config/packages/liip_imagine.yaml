@@ -10,11 +10,9 @@ liip_imagine:
                     size: [400,250]
                     mode: outbound
         icon:
-            quality: 50
+            quality: 80
             filters:
-                thumbnail:
-                    size: [ 50,50 ]
-                    mode: outbound
+             thumbail: { size: [50, 50], mode: outbound, allow_updscale: true }
 
         echelle:
             quality: 85

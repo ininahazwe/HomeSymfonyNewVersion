@@ -4,7 +4,7 @@
 
 $primary-font: 'Montserrat';
 
-body {
+body{
   font-family: $primary-font, sans-serif;
 }
 .alert{
@@ -26,11 +26,12 @@ body {
   }
 }
 
-.vich-image .form-check {
-  @extend .mt-3;
+.icon-cat{
+  width: 50px;
 }
-.vich-image img {
-  @extend .mb-2, .rounded, .shadow, .img-thumbnail;
+
+.icon-cat2{
+  width: 60px;
 }
 
 .pin img{

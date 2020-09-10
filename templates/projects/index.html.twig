@@ -3,10 +3,10 @@
 {% block title %}Projects Repertory{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-12 mx-auto">
+
+    {% if projects|length > 0 %}
     <h1 class="mb-4 text-center text-muted">Projects Repertory</h1>
-        {% for project in projects %}
+        <div class="row mb-5">
                 {% for project in projects %}
                     <div class="col-md-4">
                         <article class="pin bg-white rounded shadow">
@@ -19,35 +19,37 @@
                             <p class="text-break pl-3 pb-3">
                                 {{ project.description|length > 100 ? project.description|slice(0, 100) ~ '...' }}
                             </p>
-                            {# <p class="text-muted pl-3 pb-3">
-                            <small>
-                                Submitted by
-                                {% for user in projects.users %}
-                                {{ user.fullName }}
-                                {% endfor %}
-                            </small>
-                        </p> #}
-                            {# <p class="text-muted pl-3 pb-3">
-                            <small>
-                                Categories
-                                {% for category in project.category %}
-                                {{ category.photo }}
-                                {% endfor %}
-                            </small>
-                        </p> #}
+                            <p class="text-muted pl-3">
+                                <small>
+                                    Submitted by
+                                    {% for user in project.users %}
+                                        {{ user.fullName }}
+                                    {% endfor %}
+                                </small>
+                            </p>
+                            <p class="text-muted pl-3 pb-3">
+                                <small>
+                                    Categories
+                                        {% for category in project.category %}
+                                            <span class="bg-secondary text-white ml-1 p-2">
+                                            {{ category.name }}
+                                             </span>
+                                        {% endfor %}
+                                </small>
+                            </p>
                         </article>
                     </div>
                 {% endfor %}
-
+        </div>
         {% else %}
 
             <p class="h1 mt-5 text-center">No projects yet. <a href="{{ path('projects_new') }}">Be the first</a></p>
 
-        {% endfor %}
+        {% endif %}
 
 
 <p class="h1 mt-5 text-center"><a href="{{ path('projects_new') }}">Create new</a></p>
-    </div>
-</div>
+
+
 
 {% endblock %}

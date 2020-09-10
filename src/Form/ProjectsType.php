@@ -18,11 +18,23 @@ class ProjectsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add('name', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'project title'
+                ]
+            ])
+            ->add('description', TextareaType::class, [
+                'required' => true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'project description...'
+                ]
+            ])
             ->add('photoUpload', FileType::class, [
                 'required' => false,
-                'mapped' =>false,
+                'mapped' => false,
             ])
             ->add('users', EntityType::class, [
                 // looks for choices from this entity

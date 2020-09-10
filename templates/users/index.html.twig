@@ -26,12 +26,8 @@
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>{{ user.fullName }}</td>
                 <td>
-                    {% for project in users %}
-                        <ul>
-                            <il>
-                                {{ project.lastname }}
-                            </il>
-                        </ul>
+                    {% for user in users %}
+                        {{ user.fullName }}
                     {% endfor %}
                 </td>
                 <td>
