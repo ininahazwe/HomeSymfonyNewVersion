@@ -26,8 +26,10 @@
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>{{ user.fullName }}</td>
                 <td>
-                    {% for user in users %}
-                        {{ user.fullName }}
+                    {% for project in user.projects %}
+                        <ul>
+                            <li><a href="{{ path('property.show', {id: project.id, slug: project.slug}) }}">{{ project.name }}</a></li>
+                        </ul>
                     {% endfor %}
                 </td>
                 <td>

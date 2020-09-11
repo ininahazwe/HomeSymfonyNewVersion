@@ -23,9 +23,17 @@ class ProjectsController extends AbstractController
      */
     public function index(ProjectsRepository $projectsRepository): Response
     {
+        $user = $this->getUser();
+
         return $this->render('projects/index.html.twig', [
             'projects' => $projectsRepository->findAll(),
+            'user' => $user
         ]);
+    }
+
+    public function ProjectMe(ProjectsRepository  $projectsRepository): Response
+    {
+
     }
 
     /**
@@ -85,6 +93,8 @@ class ProjectsController extends AbstractController
      */
     public function show(Projects $project, string $slug): Response
     {
+        $user = $this->getUser();
+
         if ($project->getSlug() !== $slug) {
             return $this->redirectToRoute('projects/show.html.twig', [
                 'id' => $project->getId(),
@@ -94,6 +104,7 @@ class ProjectsController extends AbstractController
 
         return $this->render('projects/show.html.twig', [
             'project' => $project,
+            'user' => $user
         ]);
     }
 
