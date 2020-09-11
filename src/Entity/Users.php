@@ -65,6 +65,11 @@ class Users implements UserInterface
      */
     private $lastname;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -215,5 +220,17 @@ class Users implements UserInterface
     public function getFullName():string
     {
         return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
     }
 }

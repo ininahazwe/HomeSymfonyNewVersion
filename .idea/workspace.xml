@@ -11,27 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/aside.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/breadcrumb.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/card-group.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/earnings.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/head.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/header.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/sales-charts.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/scripts.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/layouts/admin-template.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/partials/top-leaders.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/layouts/admin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/liip_imagine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/liip_imagine.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProjectsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/partials/_nav.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/partials/_nav.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UsersType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UsersType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/partials/head.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/head.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/partials/header.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/header.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/partials/scripts.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/scripts.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/admin-template.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/users/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/users/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,18 +160,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/admin/partials" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/layouts" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/templates/projects" />
+      <recent name="$PROJECT_DIR$/templates/admin" />
       <recent name="$PROJECT_DIR$/templates/layouts" />
+      <recent name="$PROJECT_DIR$/templates/projects" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/layouts" />
       <recent name="$PROJECT_DIR$/templates/admin/partials" />
       <recent name="$PROJECT_DIR$/templates/categories" />
       <recent name="$PROJECT_DIR$/assets" />
@@ -202,7 +198,7 @@
       <workItem from="1599722631004" duration="10114000" />
       <workItem from="1599736040348" duration="2431000" />
       <workItem from="1599768667050" duration="1038000" />
-      <workItem from="1599809016925" duration="5684000" />
+      <workItem from="1599809016925" duration="15742000" />
     </task>
     <servers />
   </component>
@@ -230,10 +226,11 @@
       <screen x="-313" y="-1057" width="1920" height="1057" />
     </state>
     <state x="385" y="-775" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1280.710/-313.-1057.1920.1057@-313.-1057.1920.1057" timestamp="1599559498120" />
-    <state x="26" y="-880" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1599724832879">
-      <screen x="-313" y="-1057" width="1920" height="1057" />
+    <state x="226" y="142" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1599819082254">
+      <screen x="0" y="23" width="1280" height="713" />
     </state>
     <state x="26" y="-880" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1280.710/-313.-1057.1920.1057@-313.-1057.1920.1057" timestamp="1599724832879" />
     <state x="226" y="142" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1280.710/-313.-1057.1920.1057@0.23.1280.710" timestamp="1599552145536" />
+    <state x="226" y="142" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1280.713/-398.-1057.1920.1057@0.23.1280.713" timestamp="1599819082254" />
   </component>
 </project>

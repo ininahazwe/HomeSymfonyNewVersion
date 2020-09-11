@@ -8,23 +8,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Roles</th>
                 <th>IsVerified</th>
-                <th>Name</th>
                 <th>Projects</th>
+                <th>Avatar</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
+                <td>{{ user.fullName }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>{{ user.fullName }}</td>
                 <td>
                     {% for project in user.projects %}
                         <ul>
@@ -33,7 +32,10 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a href="{{ path('users_show', {'id': user.id}) }}">show</a>
+                    <img class="card-img-top" src="{{ asset('uploads/' ~ user.avatar) }}">
+                </td>
+                <td>
+                    <a href="{{ path('users_show', {'id': user.id, 'lastname': user.fullName}) }}">show</a>
                     <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>

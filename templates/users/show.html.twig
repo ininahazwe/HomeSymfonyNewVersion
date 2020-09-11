@@ -3,40 +3,33 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
-    <h1>Users</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>IsVerified</th>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-body text-center">
+            <div class="profile-pic mb-3 mt-3">
+                <img src="{{ asset('uploads/' ~ user.avatar) }}" width="150" class="rounded-circle" alt="user" />
+                <h4 class="mt-3 mb-0">{{ user.fullName }}</h4>
+                <a href="mailto:danielkristeen@gmail.com">{{ user.email }}</a>
+            </div>
+            <div class="badge badge-pill badge-light font-16">Dashboard</div>
+            <div class="badge badge-pill badge-light font-16">UI</div>
+            <div class="badge badge-pill badge-light font-16">UX</div>
+            <div class="badge badge-pill badge-info font-16" data-toggle="tooltip" data-placement="top"
+                 title="3 more">+3</div>
+        </div>
+        <div class="p-4 border-top mt-3">
+            <div class="row text-center">
+                <div class="col">
+                    <h4>Projects</h4>
+                    {% for project in user.projects %}
+                        <ul>
+                            <li><a href="{{ path('property.show', {id: project.id, slug: project.slug}) }}">{{ project.name }}</a></li>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 
     <a href="{{ path('users_index') }}">back to list</a>
 

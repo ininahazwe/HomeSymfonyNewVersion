@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}HOME Projects Dashboard{% endblock %}</title>
+        {% block stylesheets %}
+            {{ include('admin/partials/head.html.twig') }}
+        {% endblock %}
+    </head>
+    <body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <main role="main" id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+          data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+
+        {{ include('admin/partials/header.html.twig') }}
+
+        {{ include('admin/partials/aside.html.twig') }}
+
+        <div class="page-wrapper">
+
+            {% block body %}{% endblock %}
+            <footer class="footer text-center text-muted">
+                All Rights Reserved by Adminmart. Designed and Developed by <a
+                        href="https://wrappixel.com">WrapPixel</a>.
+            </footer>
+
+        </div>
+
+    </main>
+
+        {% block javascripts %}
+            {{ include('admin/partials/scripts.html.twig') }}
+        {% endblock %}
+    </body>
+</html>
