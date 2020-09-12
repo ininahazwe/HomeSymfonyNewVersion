@@ -4,19 +4,10 @@
 {% block title %}Projects Repertory{% endblock %}
 
 {% block body %}
-<div class="d-flex justify-content-center m-3">
-    {% if user is not empty %}
-        <a href="{{ path('projects_new') }}"><button type="button" class="btn btn-primary text-center"><i class="fas fa-check"></i>
-                    Create new</button></a>
-    {% else %}
-        <a href="{{ path('app_login') }}"><button type="button" class="btn btn-primary text-center"><i class="fas fa-check"></i>
-                Create new</button></a>
-    {% endif %}
 
     {% if projects|length > 0 %}
-        </div>
     <h1 class="mb-4 text-center text-muted">Projects Repertory</h1>
-        <div class="row m-5">
+        <div class="row mb-5">
                 {% for project in projects %}
                     <div class="col-md-4">
                         <article class="pin bg-white rounded shadow">
@@ -31,7 +22,7 @@
                             </p>
                             <p class="text-muted pl-3">
                                 <small>
-                                    Project by
+                                    Submitted by
                                     {% for user in project.users %}
                                         {{ user.fullName }}
                                     {% endfor %}
@@ -39,9 +30,12 @@
                             </p>
                             <p class="text-muted pl-3 pb-3">
                                 <small>
-                                    {% for category in project.category %}
-                                        <a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}"><img class="icon-cat card-img-top" style="width: 40px;" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('icon') }}" alt="{{ category.name }}"></a>
-                                    {% endfor %}
+                                    Categories
+                                        {% for category in project.category %}
+                                            <span class="bg-secondary text-white ml-1 p-2">
+                                            {{ category.name }}</a>
+                                             </span>
+                                        {% endfor %}
                                 </small>
                             </p>
                         </article>
@@ -53,6 +47,10 @@
             <p class="h1 mt-5 text-center">No projects yet. <a href="{{ path('projects_new') }}">Be the first</a></p>
 
         {% endif %}
+
+
+<p class="h1 mt-5 text-center"><a href="{{ path('projects_new') }}">Create new</a></p>
+
 
 
 {% endblock %}

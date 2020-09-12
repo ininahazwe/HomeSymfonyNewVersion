@@ -1,11 +1,15 @@
-{% extends 'layouts/base.html.twig' %}
+{% extends 'layouts/admin.html.twig' %}
 
 {% block title %}New Users{% endblock %}
 
 {% block body %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
     <h1>Create new user</h1>
+        <a href="{{ path('users_index') }}"><button type="button" class="btn waves-effect waves-light btn-primary float-right">back to list</button></a>
 
     {{ include('users/_form.html.twig') }}
 
-    <a href="{{ path('users_index') }}">back to list</a>
+    </div>
+</div>
 {% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Categories;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,7 @@ class CategoriesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
+            ->add('description', CKEditorType::class)
             ->add('photoUpload', FileType::class, [
                 'required' => false,
                 'mapped' =>false,

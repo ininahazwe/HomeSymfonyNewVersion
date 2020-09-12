@@ -1,12 +1,13 @@
-{% extends 'layouts/base.html.twig' %}
+{% extends 'layouts/admin.html.twig' %}
 
 {% block title %}Users Management{% endblock %}
 
 {% block body %}
     <h1>Users Management</h1>
-
-    <table class="table">
-        <thead>
+    <a href="{{ path('users_new') }}"><button type="button" class="btn waves-effect waves-light btn-primary float-right">Create a new user</button></a>
+    <div class="table-responsive">
+        <table id="zero_config" class="table table-striped table-bordered no-wrap">
+            <thead>
             <tr>
                 <th>Name</th>
                 <th>Email</th>
@@ -16,36 +17,38 @@
                 <th>Avatar</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
+            </thead>
+            <tbody>
+            {% for user in users %}
             <tr>
                 <td>{{ user.fullName }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</a></td>
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>
                     {% for project in user.projects %}
                         <ul>
-                            <li><a href="{{ path('property.show', {id: project.id, slug: project.slug}) }}">{{ project.name }}</a></li>
+                            <li><a href="{{ path('property.show', {id: project.id, slug: project.slug}) }}">{{ project.name | slice(0, 20) ~ '...' }}</a></li>
                         </ul>
                     {% endfor %}
                 </td>
+                <td><img class="card-img-top" src="{{ asset('uploads/' ~ user.avatar) }}"></td>
                 <td>
-                    <img class="card-img-top" src="{{ asset('uploads/' ~ user.avatar) }}">
-                </td>
-                <td>
-                    <a href="{{ path('users_show', {'id': user.id, 'lastname': user.fullName}) }}">show</a>
-                    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    <button type="button" class="btn btn-success">
+                        <a class="text-white" href="{{ path('users_show', {'id': user.id, 'lastname': user.fullName}) }}">show</a>
+                    </button><br><br>
+                    <button type="button" class="btn btn-warning">
+                        <a class="text-white" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                    </button>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('users_new') }}">Create new</a>
 {% endblock %}

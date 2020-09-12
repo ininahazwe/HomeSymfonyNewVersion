@@ -1,12 +1,11 @@
-{% extends 'layouts/base.html.twig' %}
+{% set isLogged = (user is not empty) %}
+{% extends isLogged ?'layouts/admin.html.twig' : 'layouts/base.html.twig' %}
 
 {% block title %}Categories{% endblock %}
 
 {% block body %}
 <div class="row">
-    <div class="col-md-6 mx-auto">
-        <h1>SDG Description</h1>
-        <a class="btn btn-light" href="{{ path('categories_index') }}">back to list</a>
+    <div class="col-md-10 mx-auto">
         <table class="table">
             <tbody>
                 <tr>
@@ -20,16 +19,18 @@
                 <tr>
                     <th>Icon</th>
                     <td>
-                        <img class="icon-cat card-img-top" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('echelle') }}" alt="{{ category.name }}">
+                        <img class="icon-cat card-img-top" style="width: 100px;" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('echelle') }}" alt="{{ category.name }}">
                     </td>
                 </tr>
             </tbody>
         </table>
 
-        <a href="{{ path('categories_edit', {id: category.id}) }}" class="btn btn-light">Edit the project</a>
-        <a href="#" onclick="event.preventDefault(); confirm('êtes-vous sûr(e)?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Remove the project</a>
+        {% if user is not empty %}
+            <a class="btn btn-light" href="{{ path('categories_index') }}">back to list</a>
+            <a href="{{ path('categories_edit', {id: category.id}) }}" class="btn btn-light">Edit the project</a>
 
         {{ include('categories/_delete_form.html.twig') }}
+        {% endif %}
 
     </div>
 </div>

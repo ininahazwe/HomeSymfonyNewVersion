@@ -1,0 +1,38 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block body %}
+    <h1>Projects you own</h1>
+    <div class="row">
+
+        {% if projects|length > 0 %}
+        <div class="row m-5">
+            {% for list in user.projects %}
+                <div class="col-md-4">
+                    <article class="pin bg-white rounded shadow">
+                        <div class="mw-100 rounded-top overflow-hidden">
+                            <a href="{{ path('property.show', {id: list.id, slug: list.slug}) }}">
+                                <img class="card-img-top" src="{{ asset('uploads/' ~ list.photo)|imagine_filter('article') }}" alt="{{ list.name }}">
+                            </a>
+                        </div>
+                        <h2 class="h5 pl-3 pt-3"><a href="{{ path('property.show', {id: list.id, slug: list.slug}) }}" class="text-secondary text-decoration-none">{{ list.name }}</a></h2>
+                        <p class="text-break pl-3 pb-3">
+                            {{ list.description|length > 100 ? list.description|slice(0, 100) ~ '...' }}
+                        </p>
+                        <a href="{{ path('projects_edit', {id: list.id, slug: list.slug}) }}"><button class="btn btn-light">Edit</button></a>
+                        <button class="btn btn-light float-right">Delete</button>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+
+            <p class="h1 mt-5 text-center">No projects yet. <a href="{{ path('projects_new') }}">Create your first project</a></p>
+
+        {% endif %}
+
+    </div>
+
+    <a href="{{ path('projects_index') }}" class="btn btn-light">back to list</a>
+{% endblock %}

@@ -61,6 +61,7 @@ class ResetPasswordController extends AbstractController
      */
     public function checkEmail(): Response
     {
+        $user = $this->getUser();
         // We prevent users from directly accessing this page
         if (!$this->canCheckEmail()) {
             return $this->redirectToRoute('app_forgot_password_request');
@@ -68,6 +69,7 @@ class ResetPasswordController extends AbstractController
 
         return $this->render('reset_password/check_email.html.twig', [
             'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(),
+            'user' => $user
         ]);
     }
 

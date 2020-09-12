@@ -31,17 +31,13 @@ class ProjectsController extends AbstractController
         ]);
     }
 
-    public function ProjectMe(ProjectsRepository  $projectsRepository): Response
-    {
-
-    }
-
     /**
      * @Route("/projects/new", name="projects_new", methods={"GET","POST"})
      */
     public function new(Request $request, SluggerInterface $slugger): Response
     {
         $project = new Projects();
+        $user = $this->getUser();
         $form = $this->createForm(ProjectsType::class, $project);
         $form->handleRequest($request);
 
@@ -82,6 +78,7 @@ class ProjectsController extends AbstractController
 
         return $this->render('projects/new.html.twig', [
             'project' => $project,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -109,6 +106,22 @@ class ProjectsController extends AbstractController
     }
 
     /**
+     * @Route("/projects/youown", name="projects_perso", methods={"GET"})
+     */
+    public function showProjectbyUser(Request $request) :Response
+    {
+        $user = $this->getUser();
+        $projectsRepository = $this->getDoctrine()->getRepository(Projects::class);
+
+        $projects = $projectsRepository->findAll();
+
+        return $this->render('projects/perso.html.twig',[
+            'projects' => $projects,
+            'user' => $user
+        ]);
+    }
+
+    /**
      * @Route("/projects/{id}/edit", name="projects_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Projects $project): Response
@@ -118,6 +131,8 @@ class ProjectsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Project successfully updated');
 
             return $this->redirectToRoute('projects_index');
         }

@@ -20,6 +20,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
+                'label' => false,
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
@@ -27,6 +28,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('lastname', TextType::class, [
+                'label' => false,
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
@@ -34,25 +36,21 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('email', EmailType::class, [
+                'label' => false,
                 'required' => true,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> 'email address ...'
                 ]
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => false,
                 'mapped' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> 'password ...'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -67,9 +65,20 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('confirm_password', PasswordType::class, [
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder'=> 'password confirmation ...'
                 ]
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => false,
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
             ])
         ;
     }

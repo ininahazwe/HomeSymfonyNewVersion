@@ -18,23 +18,26 @@ class UsersType extends AbstractType
         $builder
             ->add('firstname', TextType::class, [
                 'required' => true,
-                'label' => 'Firstname',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'firstname'
                 ]
             ])
             ->add('lastname', TextType::class, [
                 'required' => true,
-                'label' => 'Lastname',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Lastname'
                 ]
             ])
             ->add('email', EmailType::class, [
                 'required' => true,
-                'label' => 'Email address',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Email address'
                 ]
             ])
             ->add('avatarUpload', FileType::class, [
@@ -43,16 +46,18 @@ class UsersType extends AbstractType
             ])
             ->add('password', PasswordType::class, [
                 'required' => true,
-                'label' => 'Password',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Password'
                 ]
             ])
             ->add('confirm_password', PasswordType::class, [
                 'required' => true,
-                'label' => 'Confirm password',
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Confirm password'
                 ]
             ])
         ;

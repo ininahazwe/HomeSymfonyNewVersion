@@ -53,7 +53,8 @@ class ProjectsType extends AbstractType
                 'choice_label' => 'name',
                 'expanded' => true,
                 'multiple' => true
-            ]);
+            ])
+        ;
 
     }
 

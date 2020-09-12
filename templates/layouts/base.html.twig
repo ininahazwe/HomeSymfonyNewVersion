@@ -3,13 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/site/favicon.png') }}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
    {{ include('layouts/partials/_flash_messages.html.twig') }}
-   {{ include('layouts/partials/_nav.html.twig') }}
+   {{ include('layouts/partials/_header_not_connected.html.twig') }}
+
 <main role="main" class="container">
     {% block body %}{% endblock %}
 </main>

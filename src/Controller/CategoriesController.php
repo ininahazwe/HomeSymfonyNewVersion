@@ -23,8 +23,10 @@ class CategoriesController extends AbstractController
      */
     public function index(CategoriesRepository $categoriesRepository): Response
     {
+        $user = $this->getUser();
         return $this->render('categories/index.html.twig', [
             'categories' => $categoriesRepository->findAll(),
+            'user' => $user
         ]);
     }
 
@@ -85,6 +87,7 @@ class CategoriesController extends AbstractController
      */
     public function show(Categories $category, string $slug): Response
     {
+        $user = $this->getUser();
         if ($category->getSlug() !== $slug) {
             return $this->redirectToRoute('categories_show', [
                 'id' => $category->getId(),
@@ -93,6 +96,7 @@ class CategoriesController extends AbstractController
         }
         return $this->render('categories/show.html.twig', [
             'category' => $category,
+            'user' => $user
         ]);
     }
 

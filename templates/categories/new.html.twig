@@ -1,11 +1,15 @@
-{% extends 'layouts/base.html.twig' %}
+{% extends 'layouts/admin.html.twig' %}
 
 {% block title %}New Categories{% endblock %}
 
 {% block body %}
-    <h1>Create new Categories</h1>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+    <h1>Create new SDG category</h1>
 
     {{ include('categories/_form.html.twig') }}
 
     <a href="{{ path('categories_index') }}">back to list</a>
+    </div>
+</div>
 {% endblock %}
