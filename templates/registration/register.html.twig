@@ -1,27 +1,60 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register!{% endblock %}
 
 {% block body %}
-<div class="row">
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
 
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-                        {{ form_start(registrationForm) }}
+                    <h2>Register</h2>
 
-                        {{ form_row(registrationForm.firstname) }}
-                        {{ form_row(registrationForm.lastname) }}
-                        {{ form_row(registrationForm.email) }}
-                        {{ form_row(registrationForm.plainPassword) }}
-                        {{ form_row(registrationForm.confirm_password) }}
-                        {{ form_row(registrationForm.agreeTerms) }}
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs" class="dark">
+                        <ul>
+                            <li><a href="{{ path('home') }}">Home</a></li>
+                            <li>Register</li>
+                        </ul>
+                    </nav>
 
-                        <button class="btn btn-lg btn-primary" type="submit">
-                            Register
-                        </button>
-                        {{ form_end(registrationForm) }}
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 offset-xl-3">
+
+                <div class="login-register-page">
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3 style="font-size: 26px;">Let's create your account!</h3>
+                        <span>Already have an account? <a href={{ path('app_login') }}>Log In!</a></span>
+                    </div>
+
+                    {% for flashError in app.flashes('verify_email_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                    {% endfor %}
+
+                    {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.firstname) }}
+                    {{ form_row(registrationForm.lastname) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.password) }}
+                    {{ form_row(registrationForm.agreeTerms) }}
+
+                    <button type="submit" class="button ripple-effect big margin-top-30">Register</button>
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

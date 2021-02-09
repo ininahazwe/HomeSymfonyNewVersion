@@ -1,13 +1,18 @@
 {% extends 'layouts/admin.html.twig' %}
 
-{% block title %}Edit Categories{% endblock %}
+{% block title %}Edit SDG{% endblock %}
 
 {% block body %}
-    <h1>Edit Categories</h1>
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+    <h1>Edit SDG</h1>
 
     {{ include('categories/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('categories_index') }}">back to list</a>
 
     {{ include('categories/_delete_form.html.twig') }}
+    </div>
+</div>
+    <script src="{{ asset('js/images.js') }}"></script>
 {% endblock %}

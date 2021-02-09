@@ -3,36 +3,40 @@
 {% block title %}Projects{% endblock %}
 
 {% block body %}
-    <h1>Projects you own</h1>
-    <div class="row">
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner">
+        <h3 class="page-title">Your projects</h3>
 
-        {% if projects|length > 0 %}
-        <div class="row m-5">
-            {% for list in user.projects %}
-                <div class="col-md-4">
-                    <article class="pin bg-white rounded shadow">
-                        <div class="mw-100 rounded-top overflow-hidden">
-                            <a href="{{ path('property.show', {id: list.id, slug: list.slug}) }}">
-                                <img class="card-img-top" src="{{ asset('uploads/' ~ list.photo)|imagine_filter('article') }}" alt="{{ list.name }}">
-                            </a>
+            <div class="col-xl-12 col-lg-12 content-left-offset">
+                <div class="boxed-list margin-bottom-60">
+                    <div class="boxed-list-headline">
+                        <p class="numbered color filled float-right">{{ app.user.projects|length }}</p>
+                        <h3><i class="icon-material-outline-dashboard"></i> My projects</h3>
+                    </div>
+                    {% if app.user.projects|length > 0 %}
+                        <div class="listings-container compact-list-layout">
+                            {% for project in app.user.projects %}
+                                <!-- Job Listing -->
+                                <a href="{{ path('projects_show', {id: project.id, slug: project.slug}) }}" class="job-listing">
+                                    <!-- Job Listing Details -->
+                                    <div class="job-listing-details">
+                                        <!-- Details -->
+                                        <div class="job-listing-description">
+                                            <h3 class="job-listing-title">{{ project.name }}</h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+
                         </div>
-                        <h2 class="h5 pl-3 pt-3"><a href="{{ path('property.show', {id: list.id, slug: list.slug}) }}" class="text-secondary text-decoration-none">{{ list.name }}</a></h2>
-                        <p class="text-break pl-3 pb-3">
-                            {{ list.description|length > 100 ? list.description|slice(0, 100) ~ '...' }}
-                        </p>
-                        <a href="{{ path('projects_edit', {id: list.id, slug: list.slug}) }}"><button class="btn btn-light">Edit</button></a>
-                        <button class="btn btn-light float-right">Delete</button>
-                    </article>
+                    {% else %}
+                        <div class="row text-center">
+                            <p class="h4 mt-5 text-center">No projects yet. <a href="{{ path('projects_new') }}">Create your first project</a></p>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endfor %}
-        </div>
-        {% else %}
-
-            <p class="h1 mt-5 text-center">No projects yet. <a href="{{ path('projects_new') }}">Create your first project</a></p>
-
-        {% endif %}
-
+                {#{{ include('users/_delete_form.html.twig') }}#}
+            </div>
     </div>
-
-    <a href="{{ path('projects_index') }}" class="btn btn-light">back to list</a>
+</div>
 {% endblock %}

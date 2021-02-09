@@ -7,11 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectsRepository::class)
- * #ORM\Table(name="projects")
+ * @ORM\Table(name="projects", indexes={@ORM\Index(columns={"name", "description"}, flags={"fulltext"})})
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity("name")
  */
 class Projects
 {
@@ -24,11 +27,13 @@ class Projects
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="5", max="255")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min="20", max="2000")
      */
     private $description;
 
@@ -63,10 +68,16 @@ class Projects
      */
     private $updateAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="projects", orphanRemoval=true, cascade={"persist"})
+     */
+    private $images;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->category = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,6 +162,7 @@ class Projects
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
+            $user->addProject($this);
         }
 
         return $this;
@@ -213,5 +225,36 @@ class Projects
             $this->setCreatedAt(new \DateTimeImmutable);
         }
         $this->setUpdateAt(new \DateTimeImmutable);
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setProjects($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getProjects() === $this) {
+                $image->setProjects(null);
+            }
+        }
+
+        return $this;
     }
 }

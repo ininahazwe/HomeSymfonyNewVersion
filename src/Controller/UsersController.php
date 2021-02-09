@@ -2,27 +2,32 @@
 
 namespace App\Controller;
 
+use App\Entity\Images;
 use App\Entity\Users;
+use App\Form\ResetPasswordRequestFormType;
 use App\Form\UsersType;
+use App\Repository\CalendarRepository;
 use App\Repository\UsersRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @Route("/users")
- * Require ROLE_ADMIN for *every* controller method in this class.
- * @IsGranted("ROLE_SUPER_ADMIN")
  */
 class UsersController extends AbstractController
 {
     /**
      * @Route("/", name="users_index", methods={"GET"})
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(UsersRepository $usersRepository): Response
     {
@@ -33,15 +38,19 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/new", name="users_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_SUPER_ADMIN")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function new(Request $request, SluggerInterface $slugger): Response
+    public function new(Request $request, SluggerInterface $slugger, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new Users();
         $form = $this->createForm(UsersType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //Encryptage
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
 
             /** @var UploadedFile $photoFile */
             $photoFile = $form->get('avatarUpload')->getData();
@@ -67,14 +76,15 @@ class UsersController extends AbstractController
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
                 $user->setAvatar($newFilename);
-
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('users_index');
             }
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('users_index');
         }
+
         return $this->render('users/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
@@ -83,10 +93,26 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/{id}-{lastname}", name="users_show", methods={"GET"})
+     * @param UsersRepository $usersRepository
+     * @return Response
      */
-    public function show(Users $user): Response
+    public function show(UsersRepository $usersRepository, $id, CalendarRepository $calendarRepository): Response
     {
+        $calendar = $calendarRepository->findAll();
+        $user = $usersRepository->find($id);
         return $this->render('users/show.html.twig', [
+            'user' => $user,
+            'calendars' => $calendar,
+        ]);
+    }
+
+    /**
+     * @Route("/profile/{id}-{lastname}", name="users_show_perso", methods={"GET"})
+     */
+    public function showPerso(UsersRepository $usersRepository): Response
+    {
+        $user = $usersRepository->findAll();
+        return $this->render('users/profile_perso.html.twig', [
             'user' => $user
         ]);
     }
@@ -94,22 +120,36 @@ class UsersController extends AbstractController
     /**
      * @Route("/{id}/edit", name="users_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Users $user): Response
+    public function edit(Request $request, Users $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $form = $this->createForm(UsersType::class, $user);
+        $form = $this->createForm(UsersType::class, $user, [
+                'isAdmin' => $this->getUser()->isAdmin(),
+                'isLogin' => true,
+            ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Encryptage
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
 
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('users_index');
+            $this->addFlash('success', 'Infos updated !');
+            return $this->redirectToRoute('users_show', ['id' => $user->getId(), 'lastname' => $user->getLastname()]);
         }
+
+        $form = $this->createForm(ResetPasswordRequestFormType::class, null, [
+            'action' => $this->generateUrl('app_user_account_profile_modify_password'),
+            'attr' => [
+                'class' => 'mt-3'
+            ]
+        ]);
 
         return $this->render('users/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'modifyPasswordForm' => $form->createView(),
         ]);
     }
 
@@ -124,6 +164,43 @@ class UsersController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('users_index');
+        $session = new Session();
+        $session->invalidate();
+
+        $this->addFlash('success', 'Account deleted !');
+        return $this->redirectToRoute('app_logout');
+    }
+
+    /**
+     * @Route("/supprime/image/{id}", name="users_delete_image", methods={"DELETE"})
+     */
+    public function deleteImage(Images $image, Request $request){
+        $data = json_decode($request->getContent(), true);
+
+        // On vérifie si le token est valide
+        if($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token'])){
+            // On récupère le nom de l'image
+            $nom = $image->getName();
+            // On supprime le fichier
+            unlink($this->getParameter('uploads_directory').'/'.$nom);
+
+            // On supprime l'entrée de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($image);
+            $em->flush();
+
+            // On répond en json
+            return new JsonResponse(['success' => 1]);
+        }else{
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
+    }
+
+    /**
+     * @Route (name="app_user_account_profile_modify_password", methods={"GET", "POST"})
+     */
+    public function modifyPassword()
+    {
+
     }
 }

@@ -1,5 +1,25 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {# <button class="btn">{{ button_label|default('Save') }}</button> #}
-    <input type="submit" value="{{ submitButtonText | default('Enregistrer') }}" class="btn waves-effect waves-light btn-success" formnovalidate>
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    <div class="row">
+        <div class="col-md-6">
+            {{ form_row(form.users) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.category) }}
+        </div>
+    </div>
+
+{# Vérifier si la route est "projects_edit" on affiche les images #}
+    {{ form_row(form.images) }}
+    {% if app.request.attributes.get('_route') == 'projects_edit' %}
+        <h4>Images</h4>
+        {% for image in project.images %}
+            <div>
+                <img src="{{ asset('/uploads/' ~ image.name) }}" alt="Image" width="150">
+                <a href="{{ path('projects_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Delete</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <button class="btn waves-effect waves-light btn-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

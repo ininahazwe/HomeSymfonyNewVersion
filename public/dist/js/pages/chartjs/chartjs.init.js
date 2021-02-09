@@ -103,7 +103,7 @@ $(function () {
 			  fill: true,
 			  backgroundColor: "rgba(95, 118, 232,0.2)",
 			  borderColor: "rgba(95, 118, 232,1)",
-			  pointBorderColor: "#fff",
+
 			  pointBackgroundColor: "rgba(95, 118, 232,1)",
 			  pointBorderColor: "#fff",
 			  data: [25.48,54.16,7.61,8.06,4.45]

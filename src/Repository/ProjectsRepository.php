@@ -19,6 +19,24 @@ class ProjectsRepository extends ServiceEntityRepository
         parent::__construct($registry, Projects::class);
     }
 
+    /**
+     * Recherche les projets en fonction du formulaire
+     * @return  void
+     */
+    public function search($words = null, $categorie = null ){
+        $query = $this->createQueryBuilder('p');
+        if($words ==! null){
+            $query->andWhere('MATCH_AGAINST(p.name, p.description) AGAINST(:words boolean)>0')
+            ->setParameter('words', $words);
+        }
+        if($categorie ==! null){
+            $query->leftJoin('p.category', 'c');
+            $query->andWhere('c.id = :id')
+                ->setParameter('id', $categorie);
+        }
+        return $query->getQuery()->getResult();
+    }
+
     // /**
     //  * @return Projects[] Returns an array of Projects objects
     //  */

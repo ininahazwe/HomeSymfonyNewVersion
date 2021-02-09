@@ -1,0 +1,9 @@
+<h1>Email address confirmation</h1>
+
+<p>
+    To activate your account, please click here to confirm your email address:
+    <a href="{{ absolute_url(path('app_verify_account', {'id': userID, 'token': registrationToken})) }}">Confirm your email address</a>.
+    The link will expire at {{ tokenLifeTime }}.
+</p>
+
+<img src="{{ email.image('@images/logo-icon.png') }}" alt="footer email">

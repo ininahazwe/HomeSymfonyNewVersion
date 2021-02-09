@@ -4,10 +4,10 @@ liip_imagine:
     driver: "gd"
     filter_sets:
         article:
-            quality: 85
+            quality: 100
             filters:
                 thumbnail:
-                    size: [400,250]
+                    size: [334,420]
                     mode: outbound
         icon:
             quality: 100
@@ -21,14 +21,8 @@ liip_imagine:
                     dim: [250, 250]
 
         project:
-            quality: 80
+            quality: 85
             filters:
-                upscale:
-                    min: [800, 400]
                 thumbnail:
-                    min: [ 800, 400 ]
+                    size: [ 800,450 ]
                     mode: outbound
-                watermark_image:
-                    image: ../uploads/site/logo.png
-                    size: 0.1
-                    position: bottomright

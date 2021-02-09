@@ -1,0 +1,82 @@
+<div class="section gray padding-top-65 padding-bottom-70 full-width-carousel-fix">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12">
+                <!-- Section Headline -->
+                <div class="section-headline margin-top-0 margin-bottom-25">
+                    <h3>Last projects</h3>
+                    <a href="{{ path('projects_index') }}" class="headline-link">Browse All Projects</a>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="default-slick-carousel freelancers-container freelancers-grid-layout">
+                    {% if projects|length > 0 %}
+                        {% for project in projects %}
+                    <!--Freelancer -->
+                    <div class="freelancer">
+
+                        <!-- Overview -->
+                        <div>
+                            <div class="freelancer-overview-inner">
+
+                                <!-- Image -->
+                                <div class="mw-100 rounded-top overflow-hidden">
+                                    <a href="{{ path('projects_show', {id: project.id, slug: project.slug}) }}">
+                                        {% if project.images %}
+                                            {% for image in project.images %}
+                                                {% if loop.first %}
+                                                    <img class="card-img-top" style="height: 200px" src="{{ asset('uploads/' ~ image.name) }}">
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </a>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="freelancer-name pl-3 pr-3">
+                                    <h4><a href="{{ path('projects_show', {id: project.id, slug: project.slug}) }}">{{ project.name }}</a></h4>
+                                    <p class="text-break mt-3">
+                                        {{ project.description|length > 100 ? project.description|slice(0, 100) ~ '...' }}
+                                    </p>
+                                    <div class="row mb-3 pl-2 pr-3">
+                                        {% for category in project.category %}
+                                            <a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}"><img class="icon-cat card-img-top m-1" style="width: 40px;" src="{{ asset('uploads/' ~ category.photo) }}" alt="{{ category.name }}"></a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Freelancer / End -->
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="section padding-top-70 padding-bottom-75">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12">
+                <div class="section-headline centered margin-top-0 margin-bottom-5">
+                    <h3>Learn more about SDGs</h3>
+                </div>
+                <div class="counters-container">
+
+                    <!-- Counter -->
+                    {% for cat in category %}
+                    <div class="single-counter zoom-hover">
+                        <a href="{{ path('categories_show', {id: cat.id, slug: cat.slug}) }}"><img class="icon-cat card-img-top m-1" style="width: 80px;" src="{{ asset('uploads/' ~ cat.photo) }}" alt="{{ cat.name }}"></a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

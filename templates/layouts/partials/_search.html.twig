@@ -1,0 +1,58 @@
+<div class="intro-banner" data-background-image="{{ asset('/uploads/site/homepage.jpg') }}">
+
+    <div class="container">
+
+        <!-- Intro Headline -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner-headline">
+                    <h3>
+                        <strong>Welcome on board</strong>
+                        <br>
+                        <span>Feel free to join the <strong class="color">Home</strong> community to turn their ideas into reality.</span>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="intro-banner-search-form margin-top-95">
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field">
+                        <label for ="intro-keywords" class="field-title ripple-effect">Looking for a project ?</label>
+                        <input id="intro-keywords" type="text" placeholder="words, sentences, tags, ...">
+                    </div>
+
+                    <!-- Button -->
+                    <div class="intro-search-button">
+                        <button class="button ripple-effect" onclick="window.location.href='{{ path('projects_fullsearch') }}'">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="intro-stats margin-top-45 hide-under-992px">
+                    <li>
+                        <strong class="">{{ pluralize(projects|length, 'project', 'projects') }}</strong>
+                        <span>already</span>
+                    </li>
+                    <li>
+                        <strong class="">{{ pluralize(category|length, 'category', 'categories') }}</strong>
+                        <span>SDG</span>
+                    </li>
+                    <li>
+                        <strong class="">100</strong>
+                        <span>participants</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

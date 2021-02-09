@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Categories;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,10 +15,12 @@ class CategoriesType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description', CKEditorType::class)
+            ->add('description', TextareaType::class)
             ->add('photoUpload', FileType::class, [
-                'required' => false,
-                'mapped' =>false,
+                'label' => 'SDG icon (JPG or PNG file)',
+                'multiple' => false,
+                'mapped' => false,
+                'required' => false
             ])
         ;
     }

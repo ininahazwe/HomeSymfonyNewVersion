@@ -4,65 +4,60 @@ namespace App\Controller;
 
 use App\Entity\Users;
 use App\Form\RegistrationFormType;
-use App\Security\EmailVerifier;
-use App\Security\UsersAuthenticator;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Service\SendEmail;
+use DateTimeImmutable;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
-use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class RegistrationController extends AbstractController
 {
-    private $emailVerifier;
-
-    public function __construct(EmailVerifier $emailVerifier)
-    {
-        $this->emailVerifier = $emailVerifier;
-    }
-
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, UsersAuthenticator $authenticator): Response
+    public function register(
+        EntityManagerInterface $entityManager,
+        Request $request,
+        SendEmail $sendEmail,
+        TokenGeneratorInterface $tokenGenerator,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response
     {
         $user = new Users();
+
         $form = $this->createForm(RegistrationFormType::class, $user);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $registrationToken = $tokenGenerator->generateToken();
+            $user->setRegistrationToken($registrationToken)
+                // encode the plain password
+                ->setPassword($passwordEncoder->encodePassword($user, $form->get('password')->getData()));
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('no-reply@home-education.fr', 'Home Projects Platform'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
             // do anything else you need here, like send an email
 
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'admin' // firewall name in security.yaml
-            );
+            $sendEmail->send([
+                'recipient_email' => $user->getEmail(),
+                'subject'         => "Email verification for account validation",
+                'html_template'   => "registration/register_confirmation_email.html.twig",
+                'context'         => [
+                    'userID'            => $user->getId(),
+                    'registrationToken' => $registrationToken,
+                    'tokenLifeTime'     => $user->getAccountMustBeVerifiedBefore()->format('d/m/Y à H:i')
+                ]
+            ]);
+
+            $this->addFlash('success', "Your account has been created. Check your mailbox for activation");
+
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -71,24 +66,26 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/verify/email", name="app_verify_email")
+     * @Route("/{id<\d+>}/{token}", name="app_verify_account", methods={"GET"})
      */
-    public function verifyUserEmail(Request $request): Response
+
+    public function verifyUserAccount(EntityManagerInterface $entityManager, Users $users, string $token): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        // validate email confirmation link, sets User::isVerified=true and persists
-        try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
-        } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $exception->getReason());
-
-            return $this->redirectToRoute('app_register');
+        if(($users->getRegistrationToken() === null) || ($users->getRegistrationToken() !==
+                $token) || ($this->isNotRequestedInTime($users->getAccountMustBeVerifiedBefore())))
+        {
+            throw new AccessDeniedException();
         }
+        $users->setIsVerified(true);
+        $users->setAccountVerifiedAt(new DateTimeImmutable('now'));
+        $users->setRegistrationToken(null);
+        $entityManager->flush();
+        $this->addFlash('success', 'Your account is now activated');
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
-
-        return $this->redirectToRoute('projects_index');
+        return $this->redirectToRoute('app_login');
+    }
+    private function isNotRequestedInTime(\DateTimeImmutable $accountMustBeVerifiedBefore):bool
+    {
+        return (new \DateTimeImmutable('now') > $accountMustBeVerifiedBefore);
     }
 }

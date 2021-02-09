@@ -1,13 +1,36 @@
-{% extends 'layouts/base.html.twig' %}
+{% extends 'layouts/admin.html.twig' %}
 
-{% block title %}Edit Users{% endblock %}
+{% block title %}Edit account{% endblock %}
 
 {% block body %}
-    <h1>Edit Users</h1>
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
 
-    {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
+                    <!-- Headline -->
+                    <div class="headline">
+                        <div class="float-right">
+                            {{ include('users/_delete_form.html.twig') }}
+                        </div>
+                        <h3><i class="icon-line-awesome-list-ul"></i> Edit user</h3>
+                    </div>
 
-    <a href="{{ path('users_index') }}">back to list</a>
+                    <div class="content with-padding padding-bottom-10">
+                        {{ form_start(modifyPasswordForm) }}
+                        {{ form_row(modifyPasswordForm.password.first) }}
+                        {{ form_row(modifyPasswordForm.password.second) }}
+                        <button type="submit" class="btn btn-sm btn-warning m-3">Modify password</button>
+                        {{ form_end(modifyPasswordForm) }}
+                    </div>
 
-    {{ include('users/_delete_form.html.twig') }}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a href="{{ path('users_index') }}"><button class="btn btn-light mt-5">back to list</button></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,33 +1,284 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
-    <div class="container">
-        <a href="{{ path('projects_index') }}"><img class="icon-cat2 card-img-top" src="{{ asset('uploads/site/logo.png')  }}"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<header id="header-container" class="fullwidth transparent">
+    <!-- Header -->
+    <div id="header">
+        <div class="container">
 
-        <div class="collapse navbar-collapse" id="navbarsExample03">
-            <ul class="navbar-nav ml-auto">
-                {% if is_granted('ROLE_USER') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('projects_new') }}">New Project</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Account</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_register') }}">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
-                    </li>
-                {% endif %}
+            <!-- Left Side Content -->
+            <div class="left-side">
 
-            </ul>
+                <!-- Logo -->
+                <div id="logo">
+                    <a href="{{ path('home') }}"><img src="{{ asset('uploads/site/logo.png') }}" alt=""></a>
+                </div>
+
+                <!-- Main Navigation -->
+                <nav id="navigation">
+                    <ul id="responsive">
+                        {% if app.user is not empty %}
+                            <li><a href="{{ path('admin') }}" class="current">Dashboard</a></li>
+                        {% endif %}
+                        <li><a href="https://home-education.fr/">Home Main Website</a>
+                            <ul class="dropdown-nav">
+                                <li><a href="https://home-education.fr/#about">About the association</a></li>
+                                <li><a href="https://home-education.fr/#editions">Program editions</a></li>
+                                <li><a href="https://home-education.fr/#team">The team</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+                <div class="clearfix"></div>
+                <!-- Main Navigation / End -->
+
+            </div>
+            <!-- Left Side Content / End -->
+
+            {% if app.user is empty %}
+                <!-- Right Side Content / End -->
+                <div class="right-side">
+
+                    <div class="header-widget">
+                        <a href="#sign-in-dialog" class="popup-with-zoom-anim log-in-button"><i class="icon-feather-log-in"></i> <span>Log In / Register</span></a>
+                    </div>
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</span>
+
+                </div>
+                {#<div class="right-side">
+
+                    <div class="header-widget">
+                        <a href="{{ path('app_login') }}" class="log-in-button"><i class="icon-feather-log-in"></i> <span>Log In</span></a>
+                    </div>
+                    <div class="header-widget">
+                        <a href="{{ path('app_register') }}" class="log-in-button"><i class="icon-feather-log-in"></i> <span>Register</span></a>
+                    </div>
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+                        <button class="hamburger hamburger--collapse" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </span>
+
+                </div>#}
+                <!-- Right Side Content / End -->
+            {% else %}
+                <div class="right-side">
+                    <!-- User Menu -->
+                    <div class="header-widget">
+
+                        <!-- Messages -->
+                        <div class="header-notifications user-menu">
+                            <div class="header-notifications-trigger">
+                                <a href="#">
+                                    <div class="user-avatar status-online">
+                                        {% if app.user.avatar is not null %}
+                                            <img class="rounded-circle" style="width: 45px; height: 45px; border-radius: 45px;" src="{{ asset('uploads/' ~ app.user.avatar) }}" alt="user" />
+                                        {% else %}
+                                            <img class="rounded-circle" style="width: 45px; height: 45px; border-radius: 45px;" src="{{ asset('uploads/avatar/user.png') }}" alt="user" />
+                                        {% endif %}
+                                    </div>
+                                </a>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="header-notifications-dropdown">
+
+                                <!-- User Status -->
+                                <div class="user-status">
+
+                                    <!-- User Name / Avatar -->
+                                    <div class="user-details">
+                                        <div class="user-avatar status-online">
+                                            {% if app.user.avatar is not null %}
+                                                <img class="rounded-circle" style="width: 45px; height: 45px; border-radius: 45px;" src="{{ asset('uploads/' ~ app.user.avatar) }}" alt="user" />
+                                            {% else %}
+                                                <img class="rounded-circle" style="width: 45px; height: 45px; border-radius: 45px;" src="{{ asset('uploads/avatar/user.png') }}" alt="user" />
+                                            {% endif %}
+                                        </div>
+                                        <div class="user-name">
+                                            {{ app.user.firstname }} <span>Homer !</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <ul class="user-menu-small-nav">
+                                    <li><a href="{{ path('admin') }}"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+                                    <li><a href="{{ path('users_show_perso', {id: app.user.id, lastname: app.user.lastname}) }}"><i class="icon-material-outline-settings"></i> Settings</a></li>
+                                    <li><a href="{{ path('app_logout') }}"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- User Menu / End -->
+
+                    <!-- Mobile Navigation Button -->
+                    <span class="mmenu-trigger">
+                        <button class="hamburger hamburger--collapse" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </span>
+
+                </div>
+            {% endif %}
         </div>
     </div>
+    <!-- Header / End -->
 
-</nav>
+</header>
+<div class="clearfix"></div>
+
+<!-- Sign In Popup
+================================================== -->
+<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#login">Log In</a></li>
+            <li><a href="#register">Register</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Login -->
+            <div class="popup-tab-content" id="login">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>We're glad to see you again!</h3>
+                    <span>Don't have an account? <a href="#" class="register-tab">Sign Up!</a></span>
+                </div>
+
+                <!-- Form -->
+                <form method="post" id="login-form" action="{{ path('app_login')}}">
+                    {% if error is defined and error%}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-baseline-mail-outline"></i>
+                        <input type="text" value="" class="input-text with-border" name="email" id="emailaddress" placeholder="Email Address" required/>
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-outline-lock"></i>
+                        <input type="password" class="input-text with-border" name="password" id="password" placeholder="Password" required/>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <fieldset class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" name="remember_me" id="remember_me_checkbox">
+                        <label class="custom-control-label" for="remember_me_checkbox">Remember Me</label>
+                    </fieldset>
+
+                    <a href="{{ path('app_forgot_password') }}" class="forgot-password mt-2">Forgot Password?</a>
+                </form>
+
+                <!-- Button -->
+                <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="login-form">Log In <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+            </div>
+
+            <!-- Register -->
+            <div class="popup-tab-content" id="register">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Let's create your account!</h3>
+                </div>
+
+                <!-- Form -->
+                <form name="registration_form" method="post" action="{{ path('app_register')}}">
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-outline-account-circle"></i>
+                        <div class="form-group">
+                            <input type="text" id="registration_form_firstname" name="registration_form[firstname]" required="required" class="input-text with-border form-control" placeholder="firstname ...">
+                        </div>
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-outline-account-circle"></i>
+                        <div class="form-group">
+                            <input type="text" id="registration_form_lastname" name="registration_form[lastname]" required="required" class="input-text with-border form-control" placeholder="lastname ...">
+                        </div>
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-baseline-mail-outline"></i>
+                        <div class="form-group">
+                            <input type="email" id="registration_form_email" name="registration_form[email]" required="required" class="input-text with-border form-control" placeholder="email address ...">
+                        </div>
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-line-awesome-barcode"></i>
+                        <div class="form-group">
+                            <input type="password" id="registration_form_password_first" name="registration_form[password][first]" required="required" class="password-field form-control" placeholder="password ..."></div>
+                    </div>
+                    <div class="input-with-icon-left">
+                        <i class="icon-line-awesome-barcode"></i>
+                        <div class="form-group">
+                            <input type="password" id="registration_form_password_second" name="registration_form[password][second]" required="required" class="password-field form-control" placeholder="confirm password ...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" class="custom-control-input" value="1">
+                                <label class="switch-custom custom-control-label required" for="registration_form_agreeTerms"></label>
+                            </div>
+                        </div>
+                        <p>terms of agreement</p>
+                    </div>
+
+                    <button class="button ripple-effect big margin-top-30" type="submit">
+                        Register
+                    </button>
+                    <input type="hidden" id="registration_form__token" name="registration_form[_token]" value="p8-NhN8flNx5kaMjNQmdIelyWlHliSvo0iT9i4L2FI0"></form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Sign In Popup / End -->
+
+<script src="https://cmp.osano.com/16CVzkSHpebvwAiU5/784cd711-ef42-4c41-9306-53e0e90badb9/osano.js"></script>
+<!-- Google Autocomplete -->
+<script>
+    /*function initAutocomplete() {
+        var options = {
+            types: ['(cities)'],
+            // componentRestrictions: {country: "us"}
+        };
+
+        var input = document.getElementById('autocomplete-input');
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+    }
+
+    // Autocomplete adjustment for homepage
+    if ($('.intro-banner-search-form')[0]) {
+        setTimeout(function(){
+            $(".pac-container").prependTo(".intro-search-field.with-autocomplete");
+        }, 300);
+    }*/
+
+</script>

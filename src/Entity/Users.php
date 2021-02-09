@@ -6,13 +6,15 @@ use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Monolog\DateTimeImmutable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\Table(name="users")
+ * @UniqueEntity(fields={"email"}, message="Impossible to create an account with this email")
  */
 class Users implements UserInterface
 {
@@ -25,6 +27,8 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Please enter a valid email address.")
+     * @Assert\Email(message="{{value}} is not valid")
      */
     private $email;
 
@@ -36,19 +40,9 @@ class Users implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message="a password is required")
      */
     private $password;
-
-    /**
-     * @Assert\EqualTo(propertyPath="confirm_password", message="password must be the same")
-     */
-
-    public $confirm_password;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isVerified = false;
 
     /**
      * @ORM\ManyToMany(targetEntity=Projects::class, mappedBy="users")
@@ -57,11 +51,23 @@ class Users implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * @Assert\Length(min="3", max="15")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+     * @Assert\Length(min="3", max="15")
      */
     private $lastname;
 
@@ -70,9 +76,64 @@ class Users implements UserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Calendar::class, mappedBy="users")
+     */
+    private $calendars;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $registeredAt;
+
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private $accountMustBeVerifiedBefore;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $registrationToken;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $accountVerifiedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $forgotPasswordToken;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $forgotPasswordTokenRequestedAt;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $forgotPasswordTokenMustBeVerifiedBefore;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $forgotPasswordTokenVerifiedAt;
+
     public function __construct()
     {
+        $this->isVerified = false;
+        $this->registeredAt = new DateTimeImmutable('now');
+        $this->accountMustBeVerifiedBefore = (new DateTimeImmutable('now'))->add(new \DateInterval("P1D"));
+        $this->roles = ['ROLE_USER'];
         $this->projects = new ArrayCollection();
+        $this->calendars = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,7 +141,7 @@ class Users implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -153,18 +214,6 @@ class Users implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Projects[]
      */
@@ -230,6 +279,155 @@ class Users implements UserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Calendar[]
+     */
+    public function getCalendars(): Collection
+    {
+        return $this->calendars;
+    }
+
+    public function addCalendar(Calendar $calendar): self
+    {
+        if (!$this->calendars->contains($calendar)) {
+            $this->calendars[] = $calendar;
+            $calendar->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendar(Calendar $calendar): self
+    {
+        if ($this->calendars->contains($calendar)) {
+            $this->calendars->removeElement($calendar);
+            // set the owning side to null (unless already changed)
+            if ($calendar->getUsers() === $this) {
+                $calendar->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isAdmin(): bool
+    {
+        $isAdmin =  in_array("ROLE_ADMIN", $this->getRoles());
+        if($isAdmin === true){
+            return $isAdmin;
+        }
+
+        return in_array("ROLE_SUPER_ADMIN", $this->getRoles());
+    }
+
+    public function getRegisteredAt(): \DateTimeImmutable
+    {
+        return $this->registeredAt;
+    }
+
+    public function setRegisteredAt(\DateTimeImmutable $registeredAt): self
+    {
+        $this->registeredAt = $registeredAt;
+
+        return $this;
+    }
+
+    public function getAccountMustBeVerifiedBefore(): \DateTimeImmutable
+    {
+        return $this->accountMustBeVerifiedBefore;
+    }
+
+    public function setAccountMustBeVerifiedBefore(\DateTimeImmutable $accountMustBeVerifiedBefore): self
+    {
+        $this->accountMustBeVerifiedBefore = $accountMustBeVerifiedBefore;
+
+        return $this;
+    }
+
+    public function getRegistrationToken(): ?string
+    {
+        return $this->registrationToken;
+    }
+
+    public function setRegistrationToken(?string $registrationToken): self
+    {
+        $this->registrationToken = $registrationToken;
+
+        return $this;
+    }
+
+    public function getIsVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getAccountVerifiedAt(): ?\DateTimeImmutable
+    {
+        return $this->accountVerifiedAt;
+    }
+
+    public function setAccountVerifiedAt(?\DateTimeImmutable $accountVerifiedAt): self
+    {
+        $this->accountVerifiedAt = $accountVerifiedAt;
+
+        return $this;
+    }
+
+    public function getForgotPasswordToken(): ?string
+    {
+        return $this->forgotPasswordToken;
+    }
+
+    public function setForgotPasswordToken(?string $forgotPasswordToken): self
+    {
+        $this->forgotPasswordToken = $forgotPasswordToken;
+
+        return $this;
+    }
+
+    public function getForgotPasswordTokenRequestedAt(): ?\DateTimeImmutable
+    {
+        return $this->forgotPasswordTokenRequestedAt;
+    }
+
+    public function setForgotPasswordTokenRequestedAt(?\DateTimeImmutable $forgotPasswordTokenRequestedAt): self
+    {
+        $this->forgotPasswordTokenRequestedAt = $forgotPasswordTokenRequestedAt;
+
+        return $this;
+    }
+
+    public function getForgotPasswordTokenMustBeVerifiedBefore(): ?\DateTimeImmutable
+    {
+        return $this->forgotPasswordTokenMustBeVerifiedBefore;
+    }
+
+    public function setForgotPasswordTokenMustBeVerifiedBefore(?\DateTimeImmutable $forgotPasswordTokenMustBeVerifiedBefore): self
+    {
+        $this->forgotPasswordTokenMustBeVerifiedBefore = $forgotPasswordTokenMustBeVerifiedBefore;
+
+        return $this;
+    }
+
+    public function getForgotPasswordTokenVerifiedAt(): ?\DateTimeImmutable
+    {
+        return $this->forgotPasswordTokenVerifiedAt;
+    }
+
+    public function setForgotPasswordTokenVerifiedAt(?\DateTimeImmutable $forgotPasswordTokenVerifiedAt): self
+    {
+        $this->forgotPasswordTokenVerifiedAt = $forgotPasswordTokenVerifiedAt;
 
         return $this;
     }

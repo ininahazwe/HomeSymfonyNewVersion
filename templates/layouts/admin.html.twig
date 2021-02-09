@@ -1,44 +1,31 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}HOME Projects Dashboard{% endblock %}</title>
-        {% block stylesheets %}
-            {{ include('admin/partials/head.html.twig') }}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}Welcome to HOME Projects Platform{% endblock %}</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/site/favicon.png') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {{ include('layouts/partials/_css.html.twig') }}
+    {% endblock %}
+</head>
+<body>
+<main id="wrapper">
+    {{ include('admin/partials/_header_connected.html.twig') }}
+    <div class="clearfix"></div>
+    <div class="dashboard-container">
+        {{ include('admin/partials/dash-sidebar.html.twig') }}
+        {% block body %}
+
         {% endblock %}
-    </head>
-    <body>
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
     </div>
-    <main role="main" id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-          data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
+</main
 
-        {{ include('admin/partials/_header_connected.html.twig') }}
-        {% block sidebar %}
-        {{ include('admin/partials/aside.html.twig') }}
-        {% endblock %}
-        <div class="page-wrapper">
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {{ include('layouts/partials/_scripts.html.twig') }}
+{% endblock %}
 
-            {% block body %}{% endblock %}
-            <footer class="footer text-center text-muted">
-                <p class="text-muted">
-                    <small>
-                        &copy; {{ 'now'|date('Y') }} &middot;
-                        Built with <span class="text-danger">&hearts;</span> by <a href="www.yves.com">Yves Ininahazwe</a>
-                    </small>
-                </p>
-            </footer>
-
-        </div>
-
-    </main>
-
-        {% block javascripts %}
-            {{ include('admin/partials/scripts.html.twig') }}
-        {% endblock %}
-    </body>
+</body>
 </html>

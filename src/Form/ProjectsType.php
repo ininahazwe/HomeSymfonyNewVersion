@@ -32,26 +32,29 @@ class ProjectsType extends AbstractType
                     'placeholder' => 'project description...'
                 ]
             ])
-            ->add('photoUpload', FileType::class, [
-                'required' => false,
+            ->add('images', FileType::class, [
+                'label' => 'Image (JPG or PNG file)',
+                'multiple' => true,
                 'mapped' => false,
+                'required' => false
             ])
             ->add('users', EntityType::class, [
                 // looks for choices from this entity
+                'label' => 'co-authors',
                 'class' => Users::class,
 
                 // uses the User.username property as the visible option string
                 'choice_label' => 'firstname',
-                'expanded' => true,
                 'multiple' => true
+
             ])
             ->add('category', EntityType::class, [
                 // looks for choices from this entity
+                'label' => 'related SDG',
                 'class' => Categories::class,
 
                 // uses the User.username property as the visible option string
                 'choice_label' => 'name',
-                'expanded' => true,
                 'multiple' => true
             ])
         ;

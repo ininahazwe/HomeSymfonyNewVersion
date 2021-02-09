@@ -2,13 +2,14 @@
 
 namespace App\Security;
 
-use App\Entity\Users;
+use  App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -26,13 +27,15 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public const LOGIN_ROUTE = 'app_login';
 
+    private $bruteForceChecker;
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, BruteForceChecker $bruteForceChecker)
     {
+        $this->bruteForceChecker = $bruteForceChecker;
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
@@ -62,7 +65,16 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
+        sleep(1);
+
+        if($endOfBlackListing = $this->bruteForceChecker->getEndOfBlackListing()){
+            throw new CustomUserMessageAccountStatusException("It seems that you have forgotten your log infos. 
+            For security reasons, you must wait until {$endOfBlackListing} before attempting a new connection. 
+            You can click on the link below to request a change to your password");
+        }
+
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
@@ -96,7 +108,7 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('projects_index'));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
         //
     }
 

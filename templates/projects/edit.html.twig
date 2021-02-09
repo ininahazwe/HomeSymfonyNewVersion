@@ -1,20 +1,73 @@
 {% extends 'layouts/admin.html.twig' %}
 
-{% block title %}Edit Projects{% endblock %}
+{% block title %}Edit project{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" >
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+                        {{ form_start(form) }}
+                        <!-- Headline -->
+                        <div class="headline">
+                            <!-- Buttons -->
+                            <div class="float-right">
+                                <input type="submit" value="{{ submitButtonText | default('Save') }}" class="button dark ripple-effect" formnovalidate style="margin-top: -10px;">
+                            </div>
+                            <h3><i class="icon-line-awesome-list-ul"></i> {{ project.name }}</h3>
+                        </div>
 
-    <h1>Edit this project</h1>
+                        <div class="content">
+                            <ul class="dashboard-box-list">
 
-    {{ include('projects/_form.html.twig', {'button_label': 'Update'}) }}
+                                <li>
+                                    <!-- Overview -->
+                                    <div class="freelancer-overview manage-candidates">
+                                        <div class="freelancer-overview-inner">
 
-    <a href="{{ path('projects_index') }}">back to list</a>
+                                            <!-- Avatar -->
+                                            <div class="">
+                                                {% if app.request.attributes.get('_route') == 'projects_edit' %}
+                                                    <h4>Images</h4>
+                                                    {% for image in project.images %}
+                                                        <div>
+                                                            <img src="{{ asset('/uploads/' ~ image.name) }}" alt="Image" width="150">
+                                                            <a href="{{ path('projects_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Delete</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
 
-    {{ include('projects/_delete_form.html.twig', {'button_class': 'btn btn-light'}) }}
-
+                                            <!-- Name -->
+                                            <div class="freelancer-name">
+                                                {{ form_row(form.name) }}
+                                                {{ form_row(form.description) }}
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.users) }}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{ form_row(form.category) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_row(form.images) }}
+                                                <div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                    <a href="{{ path('projects_index') }}" class="button dark ripple-effect"><i class="icon-material-outline-arrow-back"></i> Back to list</a>
+                                                    {{ include('projects/_delete_form.html.twig') }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
+    <script src="{{ asset('js/images.js') }}"></script>
 {% endblock %}
+

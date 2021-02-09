@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/site/favicon.png') }}">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-   {{ include('layouts/partials/_flash_messages.html.twig') }}
-   {{ include('layouts/partials/_header_not_connected.html.twig') }}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>{% block title %}Welcome to HOME Projects Platform{% endblock %}</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/site/favicon.png') }}">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {{ include('layouts/partials/_css.html.twig') }}
+    {% endblock %}
+</head>
+<body>
+<main id="wrapper">
+    {{ include('layouts/partials/_header_not_connected.html.twig') }}
+    <div class="clearfix"></div>
 
-<main role="main" class="container">
-    {% block body %}{% endblock %}
-</main>
+    {% block body %}
 
-   {{ include('layouts/partials/_footer.html.twig') }}
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </body>
+    {% endblock %}
+
+</main
+
+{{ include('layouts/partials/_footer.html.twig') }}
+{{ include('layouts/partials/_scripts.html.twig') }}
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+</body>
 </html>

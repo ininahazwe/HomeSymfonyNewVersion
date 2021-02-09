@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync -av ./ u102109786@access842112298.webspace-data.io:~/myplatform --include=public/build --include=public/.htaccess --exclude-from=.gitignore --exclude=".*"

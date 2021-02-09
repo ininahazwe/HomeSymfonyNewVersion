@@ -3,52 +3,72 @@
 {% block title %}Users Management{% endblock %}
 
 {% block body %}
-    <h1>Users Management</h1>
-    <a href="{{ path('users_new') }}"><button type="button" class="btn waves-effect waves-light btn-primary float-right">Create a new user</button></a>
-    <div class="table-responsive">
-        <table id="zero_config" class="table table-striped table-bordered no-wrap">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>IsVerified</th>
-                <th>Projects</th>
-                <th>Avatar</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.fullName }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</a></td>
-                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                <td>
-                    {% for project in user.projects %}
-                        <ul>
-                            <li><a href="{{ path('property.show', {id: project.id, slug: project.slug}) }}">{{ project.name | slice(0, 20) ~ '...' }}</a></li>
-                        </ul>
-                    {% endfor %}
-                </td>
-                <td><img class="card-img-top" src="{{ asset('uploads/' ~ user.avatar) }}"></td>
-                <td>
-                    <button type="button" class="btn btn-success">
-                        <a class="text-white" href="{{ path('users_show', {'id': user.id, 'lastname': user.fullName}) }}">show</a>
-                    </button><br><br>
-                    <button type="button" class="btn btn-warning">
-                        <a class="text-white" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
-                    </button>
-                </td>
-            </tr>
-            {% else %}
-                <tr>
-                    <td colspan="8">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" >
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-4">
+                        <h4 class="card-title">All users</h4>
+                        <div class="ml-auto">
+                            <div class="dropdown sub-dropdown">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table no-wrap v-middle mb-0">
+                            <thead>
+                            <tr class="border-1">
+                                <th class="border-0 font-14 font-weight-medium text-muted">Name & Email</th>
+                                <th class="border-0 font-14 font-weight-medium text-muted text-center">Role</th>
+                                <th class="border-0 font-14 font-weight-medium text-muted text-center">Projects</th>
+                                <th class="border-0 font-14 font-weight-medium text-muted text-center">Show</th>
+                                <th class="border-0 font-14 font-weight-medium text-muted">Edit</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                            <tr>
+                                <td class="px-2 py-4">
+                                    <div class="d-flex no-block align-items-center">
+                                        <div class="mr-3"><img class="rounded-circle" style="width: 45px; height: 45px; border-radius: 50%" src="{{ asset('uploads/' ~ user.avatar) }}"></div>
+                                        <div class="">
+                                            <h5 class="text-dark mb-0 font-16 font-weight-medium">{{ user.fullname }}</h5>
+                                            <span class="text-muted font-14">{{ user.email }}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center px-2 py-4">
+                                    {% for role in user.roles %}
+                                        {% if role=="ROLE_USER" %}
+                                            student
+                                        {% elseif role=="ROLE_ADMIN" %}
+                                            Mentor
+                                        {% elseif role=="ROLE_SUPER_ADMIN" %}
+                                            Webmaster
+                                        {% endif %}
+                                    {% endfor %}
 
+                                </td>
+                                <td class="text-center px-2 py-4">
+                                    {{ user.projects|length }}
+                                </td>
+                                <td class="text-center font-weight-medium text-muted px-2 py-4">
+                                    <button type="button" class="btn btn-success">
+                                        <a class="text-white" href="{{ path('users_show', {'id': user.id, 'lastname': user.fullName}) }}">show</a>
+                                    </button>
+                                </td>
+                                <td class="font-weight-medium text-dark px-2 py-4">
+                                    <button type="button" class="btn btn-warning">
+                                        <a class="text-white" href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

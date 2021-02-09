@@ -1,0 +1,14 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}New Projects{% endblock %}
+
+{% block body %}
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" >
+        <h1>Create new project</h1>
+
+        {{ include('projects/_form.html.twig', {submitButtonText: 'Post a project'}) }}
+
+    </div>
+</div>
+{% endblock %}

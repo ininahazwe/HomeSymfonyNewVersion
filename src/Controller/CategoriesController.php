@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Categories;
+use App\Entity\Images;
 use App\Form\CategoriesType;
 use App\Repository\CategoriesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +22,8 @@ class CategoriesController extends AbstractController
 {
     /**
      * @Route("/", name="categories_index", methods={"GET"})
+     * @param CategoriesRepository $categoriesRepository
+     * @return Response
      */
     public function index(CategoriesRepository $categoriesRepository): Response
     {
@@ -83,6 +87,7 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/{slug}-{id}", name="categories_show", requirements={"slug": "[a-z0-9\-]*"})
      * @param Categories $category
+     * @param string $slug
      * @return Response
      */
     public function show(Categories $category, string $slug): Response
@@ -111,6 +116,7 @@ class CategoriesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'SDG infos updated !');
             return $this->redirectToRoute('categories_index');
         }
 
@@ -118,6 +124,31 @@ class CategoriesController extends AbstractController
             'category' => $category,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/supprime/image/{id}", name="categories_delete_image", methods={"DELETE"})
+     */
+    public function deleteImage(Images $image, Request $request){
+        $data = json_decode($request->getContent(), true);
+
+        // On vérifie si le token est valide
+        if($this->isCsrfTokenValid('delete'.$image->getId(), $data['_token'])){
+            // On récupère le nom de l'image
+            $nom = $image->getName();
+            // On supprime le fichier
+            unlink($this->getParameter('uploads_directory').'/'.$nom);
+
+            // On supprime l'entrée de la base
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($image);
+            $em->flush();
+
+            // On répond en json
+            return new JsonResponse(['success' => 1]);
+        }else{
+            return new JsonResponse(['error' => 'Token Invalide'], 400);
+        }
     }
 
     /**

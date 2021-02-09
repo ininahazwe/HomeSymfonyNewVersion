@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Contact us{% endblock %}
+
+{% block body %}
+<div class="dashboard-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+        <div class="row">
+            <!-- Dashboard Box -->
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
+
+                    <!-- Headline -->
+                    <div class="headline">
+                        <h3><i class="icon-feather-folder-plus"></i> Contact form</h3>
+                    </div>
+                    <div class="content with-padding padding-bottom-10">
+                        <div class="col-xl-5 offset-xl-3">
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {{ form_start(contactForm) }}
+                            <div class="row">
+                                <div class="col-xl-6">{{ form_row(contactForm.firstname) }}</div>
+                                <div class="col-xl-6">{{ form_row(contactForm.lastname) }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">{{ form_row(contactForm.phone) }}</div>
+                                <div class="col-xl-6">{{ form_row(contactForm.email) }}</div>
+                            </div>
+                            {{ form_end(contactForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

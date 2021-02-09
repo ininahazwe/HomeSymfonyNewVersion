@@ -3,43 +3,51 @@
 {% block title %}Categories index{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-center m-3">
-        <a href="{{ path('categories_new') }}"><button type="button" class="btn btn-primary text-center"><i class="fas fa-check"></i>
-                Create new</button></a>
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="dashboard-box margin-top-0">
+
+                <!-- Headline -->
+                <div class="headline">
+                    <h3><i class="icon-line-awesome-list-ul"></i> {{ categories|length}} SDGs</h3>
+                </div>
+
+                <div class="content">
+                    <ul class="dashboard-box-list">
+                        {% for category in categories %}
+                        <li>
+                            <!-- Overview -->
+                            <div class="freelancer-overview manage-candidates">
+                                <div class="freelancer-overview-inner">
+
+                                    <!-- Avatar -->
+                                    <div class="">
+                                        <a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}"><img style="width: 80px;" src="{{ asset('uploads/' ~ category.photo) }}"></a>
+                                    </div>
+
+                                    <!-- Name -->
+                                    <div class="freelancer-name">
+                                        <!-- Buttons -->
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                        <div class="always-visible margin-top-25 margin-bottom-5 float-right">
+                                            <a href="{{ path('categories_edit', {id: category.id, slug: category.slug}) }}" class="button gray ripple-effect ico" title="edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
+                                        </div>
+                                        {% endif %}
+                                        <h4><a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}">{{ category.name|capitalize}}</a></h4>
+                                        <!-- Details -->
+                                        {{ category.description|length > 100 ? category.description|slice(0, 100) ~ '...' }}
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-<div class="row">
-    <div class="col-md-10 mx-auto">
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Icon</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for category in categories %}
-                <tr>
-                    <td>{{ category.name|capitalize }}</td>
-                    <td>{{ category.description|length > 50 ? category.description|slice(0, 50) ~ '...' }}</td>
-                    <td>
-                        <a href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}"><img class="card-img-top" style="width: 50px;" src="{{ asset('uploads/' ~ category.photo)|imagine_filter('icon') }}" alt="{{ category.name }}"></a>
-                    </td>
-                    <td>
-                        <a class="btn btn-light" href="{{ path('categories_show', {id: category.id, slug: category.slug}) }}">show</a>
-                        <a class="btn btn-light" href="{{ path('categories_edit', {id: category.id, slug: category.slug}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
     </div>
 </div>
 {% endblock %}

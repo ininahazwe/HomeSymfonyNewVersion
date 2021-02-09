@@ -3,13 +3,24 @@
 {% block title %}New Users{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-10 mx-auto">
-    <h1>Create new user</h1>
-        <a href="{{ path('users_index') }}"><button type="button" class="btn waves-effect waves-light btn-primary float-right">back to list</button></a>
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
 
-    {{ include('users/_form.html.twig') }}
+                    <!-- Headline -->
+                    <div class="headline">
+                        <h3><i class="icon-line-awesome-list-ul"></i> Create user</h3>
+                    </div>
 
+                    <div class="content with-padding padding-bottom-10">
+                            <div class="margin-top-20"></div>
+                            {{ include('users/_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

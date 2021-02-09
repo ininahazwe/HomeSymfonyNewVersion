@@ -3,13 +3,28 @@
 {% block title %}New Categories{% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col-md-6 mx-auto">
-    <h1>Create new SDG category</h1>
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" >
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
 
-    {{ include('categories/_form.html.twig') }}
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-line-awesome-list-ul"></i> Create new SDG</h3>
+                        </div>
 
-    <a href="{{ path('categories_index') }}">back to list</a>
+                        <div class="content">
+                            <ul class="dashboard-box-list">
+                                <li>
+                                    {{ include('categories/_form.html.twig') }}
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="{{ path('categories_index') }}"><button class="btn btn-light mt-5">back to list</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 {% endblock %}
