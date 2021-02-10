@@ -10,140 +10,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="Login&#10;Register&#10;Log&#10;Remember Me">
-      <change afterPath="$PROJECT_DIR$/.env.prod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/js/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/deploy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/edit-user-ip-whitelist.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/images.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/modify-password.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/module/check-password-entered.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/module/confirm-identity.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/module/set-cursor-at-end.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/module/update-switch-label.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/module/update-whitelist-ip-addresses.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Extensions/Doctrine/MatchAgainst.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/ForgotPasswordType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/FormExtension/RepeatedPasswordType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Notification/ContactNotification.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Security/BruteForceChecker.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Security/UserChecker.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Service/SendEmail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/_flashbag.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/partials/dash-sidebar.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error403.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/TwigBundle/Exception/error404.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/emails/contact.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_1.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_2.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/home/contact.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/home/mentions-legales.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/layouts/partials/_css.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/layouts/partials/_projects_carousel.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/layouts/partials/_scripts.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/layouts/partials/_search.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/projects/full-search.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/register_confirmation_email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/users/profile_perso.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/home.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/home.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="Remember Me repaired">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/dev/monolog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/dev/monolog.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/fos_ckeditor.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/fos_ckeditor.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/liip_imagine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/liip_imagine.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/mailer.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/mailer.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200907194445.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200907195943.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200907200542.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200907203435.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200907204043.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200908074154.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200908083835.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200908085305.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200908090838.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20200911100851.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php.ini" beforeDir="false" afterPath="$PROJECT_DIR$/php.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dist/css/style.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/css/style.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dist/js/pages/chartjs/chartjs.init.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/js/pages/chartjs/chartjs.init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dist/js/pages/dashboards/dashboard1.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dist/js/pages/dashboards/dashboard1.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/plugins/jquery/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/plugins/jquery/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/plugins/jquery/jquery.slim.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/plugins/jquery/jquery.slim.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/plugins/summernote/summernote-bs4.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/plugins/summernote/summernote-bs4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CategoriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategoriesController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProjectsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProjectsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UsersController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Categories.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Categories.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Projects.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Projects.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ResetPasswordRequest.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CategoriesType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/CategoriesType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ProjectsType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProjectsType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UsersType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UsersType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProjectsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProjectsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UsersRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UsersRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/EmailVerifier.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/UsersAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/UsersAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/_header_connected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/_header_connected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/aside.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/aside.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/breadcrumb.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/card-group.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/earnings.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/head.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/head.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/sales-charts.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/dash-content.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/scripts.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/scripts.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/top-leaders.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/admin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/partials/_footer.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/partials/_footer.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/layouts/partials/_css.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/partials/_css.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/layouts/partials/_header_not_connected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/partials/_header_not_connected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/directory_connected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/directory_connected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/perso.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/perso.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/projects/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/projects/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/confirmation_email.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/reset_password/check_email.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/reset_password/email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_email.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/reset_password/request.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/reset_password/reset.html.twig" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/_delete_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/_delete_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/_form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,8 +275,17 @@
       <workItem from="1612694027894" duration="16962000" />
       <workItem from="1612777370520" duration="8684000" />
       <workItem from="1612805385286" duration="4782000" />
-      <workItem from="1612867877531" duration="4403000" />
+      <workItem from="1612867877531" duration="6554000" />
+      <workItem from="1612948160120" duration="3473000" />
     </task>
+    <task id="LOCAL-00001" summary="Login&#10;Register&#10;Log&#10;Remember Me">
+      <created>1612905765019</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1612905765020</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -422,6 +305,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Login&#10;Register&#10;Log&#10;Remember Me" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login&#10;Register&#10;Log&#10;Remember Me" />
+    <MESSAGE value="Remember Me repaired" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remember Me repaired" />
   </component>
 </project>

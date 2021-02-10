@@ -51,25 +51,6 @@
 				</span>
 
                 </div>
-                {#<div class="right-side">
-
-                    <div class="header-widget">
-                        <a href="{{ path('app_login') }}" class="log-in-button"><i class="icon-feather-log-in"></i> <span>Log In</span></a>
-                    </div>
-                    <div class="header-widget">
-                        <a href="{{ path('app_register') }}" class="log-in-button"><i class="icon-feather-log-in"></i> <span>Register</span></a>
-                    </div>
-
-                    <!-- Mobile Navigation Button -->
-                    <span class="mmenu-trigger">
-                        <button class="hamburger hamburger--collapse" type="button">
-                            <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span>
-                        </button>
-                    </span>
-
-                </div>#}
                 <!-- Right Side Content / End -->
             {% else %}
                 <div class="right-side">
@@ -187,12 +168,13 @@
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                    <fieldset class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input" name="remember_me" id="remember_me_checkbox">
-                        <label class="custom-control-label" for="remember_me_checkbox">Remember Me</label>
+                    <fieldset class="switches-list">
+                        <div class="switch-container">
+                            <label class="switch"><input type="checkbox" name="_remember_me" id="remember_me_checkbox"><span class="switch-button"></span> Remember me</label>
+                        </div>
                     </fieldset>
 
-                    <a href="{{ path('app_forgot_password') }}" class="forgot-password mt-2">Forgot Password?</a>
+                    <a href="{{ path('app_forgot_password') }}" class="forgot-password mt-1">Forgot Password?</a>
                 </form>
 
                 <!-- Button -->

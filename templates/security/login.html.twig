@@ -58,10 +58,12 @@
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                        <fieldset class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" name="remember_me" id="remember_me_checkbox">
-                            <label class="custom-control-label" for="remember_me_checkbox">Remember Me</label>
+                        <fieldset class="switches-list">
+                            <div class="switch-container">
+                                <label class="switch"><input type="checkbox" name="_remember_me" id="remember_me_checkbox"><span class="switch-button"></span> Remember me</label>
+                            </div>
                         </fieldset>
+
 
                         <a href="{{ path('app_forgot_password') }}" class="forgot-password mt-5">Forgot Password?</a>
 
