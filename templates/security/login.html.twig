@@ -39,6 +39,10 @@
                     <span>Don't have an account? <a href="{{ path('app_register') }}">Sign Up!</a></span>
                     </div>
 
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+                    {% include 'admin/partials/_flashbag.html.twig' %}
+
                     <form method="post">
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -50,7 +54,6 @@
                             </div>
                         {% endif %}
 
-                        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                         <label for="inputEmail">Email</label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
                         <label for="inputPassword">Password</label>

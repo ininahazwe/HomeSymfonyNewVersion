@@ -77,7 +77,7 @@ class RegistrationController extends AbstractController
             throw new AccessDeniedException();
         }
         $users->setIsVerified(true);
-        $users->setAccountVerifiedAt(new DateTimeImmutable('now'));
+        $users->setAccountVerifiedAt(new \DateTimeImmutable('now'));
         $users->setRegistrationToken(null);
         $entityManager->flush();
         $this->addFlash('success', 'Your account is now activated');
