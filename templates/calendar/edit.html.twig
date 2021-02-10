@@ -1,0 +1,24 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block body %}
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
+                    <!-- Headline -->
+                    <div class="headline">
+                        <h3><i class="icon-line-awesome-list-ul"></i> Edit event</h3>
+                    </div>
+                    <div class="content">
+                        {{ include('calendar/_form.html.twig', {'button_label': 'Update'}) }}
+                    </div>
+                    <a href="{{ path('calendar_index') }}"><button class="btn btn-light mt-5">back to list</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {{ include('calendar/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'layouts/admin.html.twig' %}
+{% block title %}Calendar{% endblock %}
+{% block body %}
+
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+
+    <div id="calendrier">
+    </div>
+        <!--Calendar -->
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.0/main.min.js" integrity="sha256-DBxkGZLxKsLKhz054qUpBqtotG00r9AELGpSigJujLg=" crossorigin="anonymous"></script>
+
+        <script>
+
+            window.onload = () => {
+                let calendarElt = document.querySelector("#calendrier")
+                let calendar = new FullCalendar.Calendar(calendarElt, {
+                    selectable: true,
+                    initialView: 'dayGridMonth',
+                    timeZone: 'Europe/Paris',
+                    headerToolbar: {
+                        start: 'prev,next today',
+                        center: 'title',
+                        end: 'dayGridMonth,timeGridWeek,list'
+                    },
+                    events: {{ data|raw }},
+                    editable: true,
+                    eventResizableFromStart: true,
+                    aspectRatio: 2,
+                })
+
+                calendar.on('eventChange', (e) => {
+                    let url = `/api/${e.event.id}/edit`
+                    let donnees = {
+                        "title": e.event.title,
+                        "description": e.event.extendedProps.description,
+                        "start": e.event.start,
+                        "end": e.event.end,
+                        "backgroundColor": e.event.backgroundColor,
+                        "borderColor": e.event.borderColor,
+                        "textColor": e.event.textColor,
+                        "allDay": e.event.allDay
+                    }
+
+                    let xhr = new XMLHttpRequest
+                    xhr.open("PUT", url)
+                    xhr.send(JSON.stringify(donnees))
+                })
+
+                calendar.render()
+            }
+        </script>
+    </div>
+</div>
+
+{% endblock %}

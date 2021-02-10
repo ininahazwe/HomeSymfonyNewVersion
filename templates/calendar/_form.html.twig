@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.start) }}
+    {{ form_row(form.end) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.all_day) }}
+    {{ form_row(form.background_color) }}
+    {{ form_row(form.border_color) }}
+    {{ form_row(form.text_color) }}
+<button class="btn waves-effect waves-light btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

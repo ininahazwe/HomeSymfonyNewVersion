@@ -1,0 +1,8 @@
+/* Add here all your CSS customizations */
+
+.zoom-hover{
+ &:hover{
+   transform: translateY(-5px);
+   box-shadow: 0 4px 12px rgba(42,65,232,0.25);
+ }
+}

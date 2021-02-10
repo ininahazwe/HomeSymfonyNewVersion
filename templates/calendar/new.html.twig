@@ -1,0 +1,30 @@
+{% extends 'layouts/admin.html.twig' %}
+{% block title %}Calendar{% endblock %}
+
+{% block body %}
+
+<div class="dashboard-content-container" data-simplebar>
+    <div class="dashboard-content-inner" >
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
+
+                    <!-- Headline -->
+                    <div class="headline">
+                        <h3><i class="icon-line-awesome-list-ul"></i> Create new event</h3>
+                    </div>
+
+                    <div class="content d-flex justify-content-center">
+                        <ul class="dashboard-box-list">
+                            <li>
+                                {{ include('calendar/_form.html.twig') }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

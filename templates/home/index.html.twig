@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Projects Repertory{% endblock %}
+
+{% block body %}
+
+    {{ include('layouts/partials/_search.html.twig') }}
+    {{ include('layouts/partials/_projects_carousel.html.twig') }}
+
+    {% if projects|length < 0 %}
+        <p class="h1 mt-5 text-center">No projects yet. <a href="{{ path('projects_new') }}">Be the first</a></p>
+    {% endif %}
+
+{% endblock %}
