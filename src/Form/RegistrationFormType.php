@@ -48,7 +48,6 @@ class RegistrationFormType extends AbstractType
             ->add('password', RepeatedPasswordType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => "I accept the terms of use of this site",
-                'label_attr' => ['class' => 'switch-custom'],
                 'mapped' => false,
                 'required' => true,
                 'constraints' => [

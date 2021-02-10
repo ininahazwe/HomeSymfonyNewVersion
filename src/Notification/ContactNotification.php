@@ -2,12 +2,13 @@
 namespace App\Notification;
 
 use App\Entity\Contact;
+use Symfony\Component\Mailer\Mailer;
 use Twig\Environment;
 
 class ContactNotification {
 
     /**
-     * @var \Swift_Mailer
+     * @var Mailer
      */
     private $mailer;
 
@@ -16,14 +17,14 @@ class ContactNotification {
      */
     private $renderer;
 
-    public function __construct(\Swift_Mailer $mailer, Environment $renderer){
+    public function __construct(Mailer $mailer, Environment $renderer){
 
         $this->mailer = $mailer;
         $this->renderer = $renderer;
     }
 
     public function notify(Contact $contact){
-        $message = (new \Swift_Message('Home:' . $contact->getMessage()))
+        $message = (new Mailer('Home:' . $contact->getMessage()))
             ->setForm('noreply@home-association.fr')
             ->setTo('yves@cri-paris.org')
             ->setReplyTo($contact->getEmail())

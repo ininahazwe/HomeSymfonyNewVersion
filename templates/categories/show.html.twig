@@ -23,7 +23,6 @@
 
                         <div class="content">
                             <ul class="dashboard-box-list">
-
                                 <li>
                                     <!-- Overview -->
                                     <div class="freelancer-overview manage-candidates">
@@ -42,9 +41,7 @@
                                                 <!-- Buttons -->
                                                 <div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
                                                     {% if user %}
-                                                    <a href="{{ path('categories_index') }}" class="button dark ripple-effect"><i class="icon-material-outline-arrow-back"></i> Back to list</a>
-                                                    {% else %}
-                                                    <a href="{{ path('home') }}" class="button dark ripple-effect"><i class="icon-material-outline-arrow-back"></i> Back to homepage</a>
+                                                    <a href="{{ path('categories_index') }}" class="button dark ripple-effect"><i class="icon-material-outline-arrow-back"></i> Back to list</a
                                                     {% endif %}
                                                     {% if is_granted('ROLE_ADMIN') %}
                                                         {{ include('categories/_delete_form.html.twig') }}
@@ -54,10 +51,10 @@
                                         </div>
                                     </div>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
+                    <a href="{{ path('home') }}" class="button dark ripple-effect mt-3"><i class="icon-material-outline-arrow-back"></i> Back to homepage</a>
                 </div>
             </div>
         </div>

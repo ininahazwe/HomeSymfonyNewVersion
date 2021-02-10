@@ -7,9 +7,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class BruteForceChecker
 {
-    private AuthLogRepository $authLogRepository;
+    private $authLogRepository;
 
-    private RequestStack $requestStack;
+    private $requestStack;
 
     public function __construct(AuthLogRepository $authLogRepository, RequestStack $requestStack)
     {

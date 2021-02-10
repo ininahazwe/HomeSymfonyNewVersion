@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResetPasswordRequestFormType extends AbstractType {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('password', RepeatedPasswordType::class);

@@ -9,11 +9,11 @@ use Symfony\Component\Mime\Address;
 
 class SendEmail
 {
-    private MailerInterface $mailer;
+    private $mailer;
 
-    private string $senderEmail;
+    private $senderEmail;
 
-    private string $senderName;
+    private $senderName;
 
     public function __construct(
         MailerInterface $mailer,

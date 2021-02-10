@@ -16,30 +16,28 @@ class RepeatedPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
        $resolver->setDefaults([
-           'type' => PasswordType::class,
+           'type'            => PasswordType::class,
            'invalid_message' => "Passwords must be the same",
-           'required' => true,
-           'first_options' => [
+           'required'        => true,
+           'first_options'   => [
                'label' => "Password",
-               'label_attr' => [
+               'label_attr'  => [
 
-                   'title' => "Pour des raisons de sécurité, votre mot de passe doit contenir au minimum 12 caractères"
+                   'title'   => "Pour des raisons de sécurité, votre mot de passe doit contenir au minimum 12 caractères"
                ],
-               'attr' => [
-                   'class' => 'text-center',
+               'attr'          => [
                    'maxlength' => 255,
-                   'title' => "Pour des raisons de sécurité, votre mot de passe doit contenir au minimum 12 caractères"
+                   'title'     => "Pour des raisons de sécurité, votre mot de passe doit contenir au minimum 12 caractères"
                ]
            ],
            'second_options' => [
                'label' => "confirm your password",
                'label_attr' => [
-                   'title' => "confirm your password"
+                   'title'  => "confirm your password"
                ],
-               'attr' => [
-                   'class' => 'text-center',
+               'attr'          => [
                    'maxlength' => 255,
-                   'title' => "confirm your password"
+                   'title'     => "confirm your password"
                ]
            ]
        ]);

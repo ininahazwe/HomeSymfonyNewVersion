@@ -16,17 +16,17 @@ class ForgotPasswordType extends AbstractType
     {
         $builder
             ->add('email', RepeatedType::class, [
-                'type' => EmailType::class,
-                'invalid_message' => "Emails should be identical.",
-                'required' => true,
-                'constraints' => [
+                'type'              => EmailType::class,
+                'invalid_message'   => "Emails should be identical.",
+                'required'          => true,
+                'constraints'       => [
                     new NotBlank(),
                     new Email()
                 ],
-                'first_options' => [
+                'first_options'     => [
                     'label' => 'Enter your email '
                 ],
-                'second_options' => [
+                'second_options'    => [
                     'label' => 'Confirm your email'
                 ]
             ]);

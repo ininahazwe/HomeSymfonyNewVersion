@@ -10,14 +10,24 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="Remember Me repaired">
+    <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="Flash Messages repaired">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ForgotPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ForgotPasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ForgotPasswordType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/FormExtension/RepeatedPasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FormExtension/RepeatedPasswordType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/partials/_css.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/partials/_css.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/layouts/partials/_header_not_connected.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layouts/partials/_header_not_connected.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Notification/ContactNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Notification/ContactNotification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/BruteForceChecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/BruteForceChecker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Service/SendEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SendEmail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/partials/_flashbag.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/_flashbag.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/categories/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/show.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forgot_password/forgot_password_email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_email.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_1.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_2.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +286,7 @@
       <workItem from="1612777370520" duration="8684000" />
       <workItem from="1612805385286" duration="4782000" />
       <workItem from="1612867877531" duration="6554000" />
-      <workItem from="1612948160120" duration="3473000" />
+      <workItem from="1612948160120" duration="15229000" />
     </task>
     <task id="LOCAL-00001" summary="Login&#10;Register&#10;Log&#10;Remember Me">
       <created>1612905765019</created>
@@ -285,7 +295,28 @@
       <option name="project" value="LOCAL" />
       <updated>1612905765020</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Remember Me repaired">
+      <created>1612954125509</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612954125509</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Remember Me repaired">
+      <created>1612954310258</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1612954310258</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Flash Messages repaired">
+      <created>1612961194004</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1612961194004</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,6 +337,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Login&#10;Register&#10;Log&#10;Remember Me" />
     <MESSAGE value="Remember Me repaired" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remember Me repaired" />
+    <MESSAGE value="Flash Messages repaired" />
+    <option name="LAST_COMMIT_MESSAGE" value="Flash Messages repaired" />
   </component>
 </project>
