@@ -1,5 +1,12 @@
 {% extends 'layouts/base.html.twig' %}
 
+{% block javascripts %}
+    {% if countOfRecentLoginFail >= 3 %}
+        <script src="https://hcaptcha.com/1/api.js?hl={{ app.request.locale }}" async defer></script>
+        {% include 'admin/partials/_hcaptcha_callback_script.html.twig' %}
+    {% endif %}
+{% endblock %}
+
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
@@ -67,12 +74,16 @@
                             </div>
                         </fieldset>
 
+                        {% if countOfRecentLoginFail >= 3 %}
+                            {% include 'admin/partials/_hcaptcha_submit_button.html.twig' %}
+                        {% else %}
+                            <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">
+                                Sign in <i class="icon-material-outline-arrow-right-alt"></i>
+                            </button>
+                        {% endif %}
 
                         <a href="{{ path('app_forgot_password') }}" class="forgot-password mt-5">Forgot Password?</a>
 
-                        <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">
-                            Sign in <i class="icon-material-outline-arrow-right-alt"></i>
-                        </button>
                     </form>
                 </div>
             </div>

@@ -8,6 +8,7 @@ parameters:
     uploads_directory: '%kernel.project_dir%/public/uploads'
     app.sender_email: '%env(MAILER_SENDER_EMAIL)%'
     app.sender_name: '%env(MAILER_SENDER_NAME)%'
+    app.hcaptcha_secret_key: '%env(HCAPTCHA_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -41,3 +42,9 @@ services:
         arguments:
             $senderEmail: '%app.sender_email%'
             $senderName: '%app.sender_name%'
+
+    App\Service\HCaptcha:
+        arguments:
+            $hCaptchaSecretKey: '%app.hcaptcha_secret_key%'
+
+

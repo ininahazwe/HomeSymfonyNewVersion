@@ -3,6 +3,8 @@
 namespace App\Security;
 
 use  App\Entity\Users;
+use App\Repository\AuthLogRepository;
+use App\Service\HCaptcha;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,16 +29,27 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
 
     public const LOGIN_ROUTE = 'app_login';
 
+    private $authLogRepository;
     private $bruteForceChecker;
     private $entityManager;
+    private $hCaptcha;
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, BruteForceChecker $bruteForceChecker)
+    public function __construct(EntityManagerInterface $entityManager,
+                                UrlGeneratorInterface $urlGenerator,
+                                CsrfTokenManagerInterface $csrfTokenManager,
+                                UserPasswordEncoderInterface $passwordEncoder,
+                                BruteForceChecker $bruteForceChecker,
+                                AuthLogRepository $authLogRepository,
+                                HCaptcha $hCaptcha
+    )
     {
+        $this->authLogRepository = $authLogRepository;
         $this->bruteForceChecker = $bruteForceChecker;
         $this->entityManager = $entityManager;
+        $this->hCaptcha = $hCaptcha;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
@@ -48,8 +61,14 @@ class UsersAuthenticator extends AbstractFormLoginAuthenticator implements Passw
             && $request->isMethod('POST');
     }
 
-    public function getCredentials(Request $request)
+    public function getCredentials(Request $request): array
     {
+        if(
+            $this->authLogRepository->getRecentAuthAttemptFailure($request->request->get('email'), $request->getClientIp()) >= 3
+            && !$this->hCaptcha->isHCaptchaValid()
+        )
+            throw new CustomUserMessageAuthenticationException('Anti-spam verification failed, please try again.');
+
         $credentials = [
             'email' => $request->request->get('email'),
             'password' => $request->request->get('password'),

@@ -10,24 +10,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="Flash Messages repaired">
+    <list default="true" id="65930900-e847-4447-9777-0ff4ff8f8753" name="Default Changelist" comment="Password reset added">
+      <change afterPath="$PROJECT_DIR$/src/Service/HCaptcha.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/partials/_hcaptcha_callback_script.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/partials/_hcaptcha_submit_button.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/home.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/home.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ForgotPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ForgotPasswordController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ForgotPasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ForgotPasswordType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/FormExtension/RepeatedPasswordType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FormExtension/RepeatedPasswordType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ResetPasswordRequestFormType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Notification/ContactNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Notification/ContactNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/BruteForceChecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/BruteForceChecker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/SendEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/SendEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/partials/_flashbag.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/partials/_flashbag.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forgot_password/forgot_password_email.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_email.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_1.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_1.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/forgot_password/forgot_password_step_2.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/UsersAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/UsersAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +152,7 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-zendframework-bridge" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/vendor/liip/imagine-bundle" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/cors-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hCFc18D5U2KAb5A8GOUDBlgW0q" />
@@ -286,7 +286,8 @@
       <workItem from="1612777370520" duration="8684000" />
       <workItem from="1612805385286" duration="4782000" />
       <workItem from="1612867877531" duration="6554000" />
-      <workItem from="1612948160120" duration="15229000" />
+      <workItem from="1612948160120" duration="24480000" />
+      <workItem from="1613035538382" duration="6463000" />
     </task>
     <task id="LOCAL-00001" summary="Login&#10;Register&#10;Log&#10;Remember Me">
       <created>1612905765019</created>
@@ -316,7 +317,21 @@
       <option name="project" value="LOCAL" />
       <updated>1612961194004</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Password reset added">
+      <created>1612979181677</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1612979181677</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Password reset added">
+      <created>1612979215729</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1612979215729</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +353,7 @@
     <MESSAGE value="Login&#10;Register&#10;Log&#10;Remember Me" />
     <MESSAGE value="Remember Me repaired" />
     <MESSAGE value="Flash Messages repaired" />
-    <option name="LAST_COMMIT_MESSAGE" value="Flash Messages repaired" />
+    <MESSAGE value="Password reset added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Password reset added" />
   </component>
 </project>
